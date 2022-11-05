@@ -1,0 +1,575 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/*自己分装的bootstarap库*/
+/*1、文字类*/
+.lead.data-v-739024b8 {
+  font-size: 1.25em;
+  font-weight: 300;
+}
+.text-size-sm.data-v-739024b8 {
+  font-size: 24rpx;
+}
+.text-size-md.data-v-739024b8 {
+  font-size: 28rpx;
+}
+.text-size-default.data-v-739024b8 {
+  font-size: 32rpx;
+}
+.text-size-lg.data-v-739024b8 {
+  font-size: 36rpx;
+}
+.text-success.data-v-739024b8 {
+  color: #28a745 !important;
+}
+.text-warning.data-v-739024b8 {
+  color: #ffc107 !important;
+}
+.text-danger.data-v-739024b8 {
+  color: #dc3545 !important;
+}
+.text-info.data-v-739024b8 {
+  color: #17a2b8 !important;
+}
+.text-primary.data-v-739024b8 {
+  color: #108ee9 !important;
+}
+.text-333.data-v-739024b8 {
+  color: #333333;
+}
+.text-666.data-v-739024b8 {
+  color: #666666;
+}
+.text-999.data-v-739024b8 {
+  color: #999999;
+}
+.text-white.data-v-739024b8 {
+  color: #fff;
+}
+.text-left.data-v-739024b8 {
+  text-align: left;
+}
+.text-center.data-v-739024b8 {
+  text-align: center;
+}
+.text-right.data-v-739024b8 {
+  text-align: right;
+}
+.text-nowrap.data-v-739024b8 {
+  white-space: nowrap;
+}
+.text-wrap.data-v-739024b8 {
+  white-space: normal;
+}
+.text-truncate.data-v-739024b8 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-bold.data-v-739024b8 {
+  font-weight: bold;
+}
+.font-weight-bold.data-v-739024b8 {
+  font-weight: bold;
+}
+.font-weight-bolder.data-v-739024b8 {
+  font-weight: bolder;
+}
+.font-weight-light.data-v-739024b8 {
+  font-weight: 300;
+}
+.font-weight-lighter.data-v-739024b8 {
+  font-weight: 300;
+}
+.font-italic.data-v-739024b8 {
+  font-weight: none;
+}
+/* 2、背景类 */
+.bg-success.data-v-739024b8 {
+  background-color: #28a745 !important;
+}
+.bg-warning.data-v-739024b8 {
+  background-color: #ffc107 !important;
+}
+.bg-danger.data-v-739024b8 {
+  background-color: #dc3545 !important;
+}
+.bg-info.data-v-739024b8 {
+  background-color: #17a2b8 !important;
+}
+.bg-primary.data-v-739024b8 {
+  background-color: #108ee9 !important;
+}
+.bg-white.data-v-739024b8 {
+  background-color: #FFFFFF !important;
+}
+/* 3、边框类*/
+.border-0.data-v-739024b8 {
+  border: none;
+}
+.border-top-0.data-v-739024b8 {
+  border-top: none;
+}
+.border-right-0.data-v-739024b8 {
+  border-right: none;
+}
+.border-bottom-0.data-v-739024b8 {
+  border-bottom: none;
+}
+.border-left-0.data-v-739024b8 {
+  border-left: none;
+}
+/* 3、边框类*/
+.border-1.data-v-739024b8 {
+  border: 1rpx solid #000;
+}
+.border-top-1.data-v-739024b8 {
+  border-top: 1rpx solid #000;
+}
+.border-right-1.data-v-739024b8 {
+  border-right: 1rpx solid #000;
+}
+.border-bottom-1.data-v-739024b8 {
+  border-bottom: 1rpx solid #000;
+}
+.border-left-1.data-v-739024b8 {
+  border-left: 1rpx solid #000;
+}
+/*3.1、边框颜色*/
+.border-primary.data-v-739024b8 {
+  border-color: #108ee9;
+}
+.border-success.data-v-739024b8 {
+  border-color: #28a745;
+}
+.border-warning.data-v-739024b8 {
+  border-color: #ffc107;
+}
+.border-danger.data-v-739024b8 {
+  border-color: #dc3545;
+}
+.border-info.data-v-739024b8 {
+  border-color: #17a2b8;
+}
+/* 3.2、边框圆角 */
+.rounded.data-v-739024b8 {
+  border-radius: 0.25em;
+}
+.rounded-top.data-v-739024b8 {
+  border-top-left-radius: 0.25em;
+  border-top-right-radius: 0.25em;
+}
+.rounded-right.data-v-739024b8 {
+  border-right-top-radius: 0.25em;
+  border-right-bottom-radius: 0.25em;
+}
+.rounded-bottom.data-v-739024b8 {
+  border-bottom-left-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+}
+.rounded-left.data-v-739024b8 {
+  border-left-top-radius: 0.25em;
+  border-left-bottom-radius: 0.25em;
+}
+.rounded-circle.data-v-739024b8 {
+  border-radius: 50% !important;
+}
+.rounded-pill.data-v-739024b8 {
+  border-radius: 50rem !important;
+}
+.rounded-0.data-v-739024b8 {
+  border-radius: 0 !important;
+}
+/* 4、清除浮动 */
+.clearfix.data-v-739024b8::after {
+  content: '';
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  display: block;
+}
+/*5、display 属性*/
+.d-none.data-v-739024b8 {
+  display: none;
+}
+.d-flex.data-v-739024b8 {
+  display: flex;
+}
+.d-block.data-v-739024b8 {
+  display: block;
+}
+/* 6、 选中文字 */
+.user-select-all.data-v-739024b8 {
+  -webkit-user-select: all !important;
+  user-select: all !important;
+}
+.user-select-auto.data-v-739024b8 {
+  -webkit-user-select: auto !important;
+  user-select: auto !important;
+}
+.user-select-none.data-v-739024b8 {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+/* 7、溢出 overflow */
+.overflow-auto.data-v-739024b8 {
+  overflow: auto;
+}
+.overflow-hidden.data-v-739024b8 {
+  overflow: hidden;
+}
+.overflow-x-auto.data-v-739024b8 {
+  overflow-x: auto;
+}
+.overflow-x-hidden.data-v-739024b8 {
+  overflow-x: hidden;
+}
+.overflow-y-auto.data-v-739024b8 {
+  overflow-y: auto;
+}
+.overflow-y-hidden.data-v-739024b8 {
+  overflow-y: hidden;
+}
+/* 定位 position*/
+.position-static.data-v-739024b8 {
+  position: static !important;
+}
+.position-relative.data-v-739024b8 {
+  position: relative !important;
+}
+.position-absolute.data-v-739024b8 {
+  position: absolute !important;
+}
+.position-fixed.data-v-739024b8 {
+  position: fixed !important;
+}
+.position-sticky.data-v-739024b8 {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+}
+/* 8、布局 */
+.w-20.data-v-739024b8 {
+  width: 20%;
+}
+.w-25.data-v-739024b8 {
+  width: 25%;
+}
+.w-50.data-v-739024b8 {
+  width: 50%;
+}
+.w-75.data-v-739024b8 {
+  width: 75%;
+}
+.w-100.data-v-739024b8 {
+  width: 100%;
+}
+.w-auto.data-v-739024b8 {
+  width: auto;
+}
+.flex-1.data-v-739024b8 {
+  flex: 1;
+}
+.flex-2.data-v-739024b8 {
+  flex: 2;
+}
+.flex-3.data-v-739024b8 {
+  flex: 3;
+}
+.flex-4.data-v-739024b8 {
+  flex: 4;
+}
+.flex-5.data-v-739024b8 {
+  flex: 5;
+}
+.flex-6.data-v-739024b8 {
+  flex: 6;
+}
+.flex-7.data-v-739024b8 {
+  flex: 7;
+}
+.flex-8.data-v-739024b8 {
+  flex: 8;
+}
+.flex-9.data-v-739024b8 {
+  flex: 9;
+}
+.flex-10.data-v-739024b8 {
+  flex: 10;
+}
+.flex-11.data-v-739024b8 {
+  flex: 11;
+}
+.flex-12.data-v-739024b8 {
+  flex: 12;
+}
+.justify-content-start.data-v-739024b8 {
+  justify-content: flex-start;
+}
+.justify-content-center.data-v-739024b8 {
+  justify-content: center;
+}
+.justify-content-end.data-v-739024b8 {
+  justify-content: flex-end;
+}
+.justify-content-around.data-v-739024b8 {
+  justify-content: space-around;
+}
+.justify-content-between.data-v-739024b8 {
+  justify-content: space-between;
+}
+.align-items-center.data-v-739024b8 {
+  align-items: center;
+}
+.align-items-end.data-v-739024b8 {
+  align-items: flex-end;
+}
+.align-items-around.data-v-739024b8 {
+  align-items: space-around;
+}
+.align-items-between.data-v-739024b8 {
+  align-items: space-between;
+}
+/* //（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。 */
+.align-self-stretch.data-v-739024b8 {
+  align-items: stretch;
+}
+.flex-nowrap.data-v-739024b8 {
+  flex-wrap: nowrap;
+}
+.flex-wrap.data-v-739024b8 {
+  flex-wrap: wrap;
+}
+.flex-column.data-v-739024b8 {
+  flex-direction: column;
+}
+.float-left.data-v-739024b8 {
+  float: left;
+}
+.float-right.data-v-739024b8 {
+  float: right;
+}
+.padding-x-1.data-v-739024b8 {
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.padding-x-2.data-v-739024b8 {
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.padding-x-3.data-v-739024b8 {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.padding-x-4.data-v-739024b8 {
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}
+.padding-y-1.data-v-739024b8 {
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.padding-y-2.data-v-739024b8 {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.padding-y-3.data-v-739024b8 {
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+.padding-y-4.data-v-739024b8 {
+  padding-top: 40rpx;
+  padding-bottom: 40rpx;
+}
+.padding-left-1.data-v-739024b8 {
+  padding-left: 10rpx;
+}
+.padding-left-2.data-v-739024b8 {
+  padding-left: 20rpx;
+}
+.padding-left-3.data-v-739024b8 {
+  padding-left: 30rpx;
+}
+.padding-left-4.data-v-739024b8 {
+  padding-left: 40rpx;
+}
+.padding-right-1.data-v-739024b8 {
+  padding-right: 10rpx;
+}
+.padding-right-2.data-v-739024b8 {
+  padding-right: 20rpx;
+}
+.padding-right-3.data-v-739024b8 {
+  padding-right: 30rpx;
+}
+.padding-right-4.data-v-739024b8 {
+  padding-right: 40rpx;
+}
+.padding-bottom-1.data-v-739024b8 {
+  padding-bottom: 10rpx;
+}
+.padding-bottom-2.data-v-739024b8 {
+  padding-bottom: 20rpx;
+}
+.padding-bottom-3.data-v-739024b8 {
+  padding-bottom: 30rpx;
+}
+.padding-bottom-4.data-v-739024b8 {
+  padding-bottom: 40rpx;
+}
+.padding-top-1.data-v-739024b8 {
+  padding-top: 10rpx;
+}
+.padding-top-2.data-v-739024b8 {
+  padding-top: 20rpx;
+}
+.padding-top-3.data-v-739024b8 {
+  padding-top: 30rpx;
+}
+.padding-top-4.data-v-739024b8 {
+  padding-top: 40rpx;
+}
+.padding-1.data-v-739024b8 {
+  padding: 10rpx;
+}
+.padding-2.data-v-739024b8 {
+  padding: 20rpx;
+}
+.padding-3.data-v-739024b8 {
+  padding: 30rpx;
+}
+.padding-4.data-v-739024b8 {
+  padding: 40rpx;
+}
+.margin-x-1.data-v-739024b8 {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+.margin-x-2.data-v-739024b8 {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.margin-x-3.data-v-739024b8 {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+.margin-x-4.data-v-739024b8 {
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+}
+.margin-y-1.data-v-739024b8 {
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.margin-y-2.data-v-739024b8 {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.margin-y-3.data-v-739024b8 {
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+.margin-y-4.data-v-739024b8 {
+  margin-top: 40rpx;
+  margin-bottom: 40rpx;
+}
+.margin-left-1.data-v-739024b8 {
+  margin-left: 10rpx;
+}
+.margin-left-2.data-v-739024b8 {
+  margin-left: 20rpx;
+}
+.margin-left-3.data-v-739024b8 {
+  margin-left: 30rpx;
+}
+.margin-left-4.data-v-739024b8 {
+  margin-left: 40rpx;
+}
+.margin-right-1.data-v-739024b8 {
+  margin-right: 10rpx;
+}
+.margin-right-2.data-v-739024b8 {
+  margin-right: 20rpx;
+}
+.margin-right-3.data-v-739024b8 {
+  margin-right: 30rpx;
+}
+.margin-right-4.data-v-739024b8 {
+  margin-right: 40rpx;
+}
+.margin-bottom-1.data-v-739024b8 {
+  margin-bottom: 10rpx;
+}
+.margin-bottom-2.data-v-739024b8 {
+  margin-bottom: 20rpx;
+}
+.margin-bottom-3.data-v-739024b8 {
+  margin-bottom: 30rpx;
+}
+.margin-bottom-4.data-v-739024b8 {
+  margin-bottom: 40rpx;
+}
+.margin-top-1.data-v-739024b8 {
+  margin-top: 10rpx;
+}
+.margin-top-2.data-v-739024b8 {
+  margin-top: 20rpx;
+}
+.margin-top-3.data-v-739024b8 {
+  margin-top: 30rpx;
+}
+.margin-top-4.data-v-739024b8 {
+  margin-top: 40rpx;
+}
+.margin-1.data-v-739024b8 {
+  margin: 10rpx;
+}
+.margin-2.data-v-739024b8 {
+  margin: 20rpx;
+}
+.margin-3.data-v-739024b8 {
+  margin: 30rpx;
+}
+.margin-4.data-v-739024b8 {
+  margin: 40rpx;
+}
+.h-100.data-v-739024b8 {
+  height: 100vh;
+}
+.w-100.data-v-739024b8 {
+  height: 100vw;
+}
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.m-subsection.data-v-739024b8 {
+  height: 80rpx;
+  flex: 1;
+}
+.m-subsection .line.data-v-739024b8 {
+  left: 0;
+  bottom: 0;
+  height: 8rpx;
+  width: 0;
+  transition: all .3s ease-in-out;
+}
+

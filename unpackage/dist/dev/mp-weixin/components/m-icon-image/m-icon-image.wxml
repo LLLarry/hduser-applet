@@ -1,0 +1,1 @@
+<block wx:if="{{coverView}}"><cover-view class="{{['data-v-d8fe8638',classStr]}}" style="{{(styleStr)}}"><cover-image class="cover-image data-v-d8fe8638" src="{{iconPath}}"></cover-image></cover-view></block><block wx:else><view class="{{['data-v-d8fe8638',classStr]}}" style="{{(styleStr)}}"><image class="cover-image data-v-d8fe8638" src="{{iconPath}}"></image></view></block>
