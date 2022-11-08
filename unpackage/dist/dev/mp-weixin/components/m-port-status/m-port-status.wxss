@@ -562,10 +562,10 @@
 /* 透明度 */
 /* 文章场景相关 */
 .m-port-status.data-v-e6ec77fc {
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 36rpx;
+  line-height: 36rpx;
   font-size: 12px;
-  border-radius: 4rpx;
+  border-radius: 36rpx;
 }
 .m-port-status.success.data-v-e6ec77fc {
   background-color: #07c160;

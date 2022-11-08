@@ -1,0 +1,20 @@
+
+.wolf-input {
+    margin-top: 50px;
+    border: 1px solid;
+    height: 50px;
+    width: 80%;
+    text-align: center;
+}
+.wolf-btn {
+    width: 80%;
+    margin-top: 10px;
+    background-color: #44b549;
+}
+.scanQrcode {
+    width: 80%;
+    margin-top: 10px;
+    background-color: #44b549;
+    color: white;
+}
+

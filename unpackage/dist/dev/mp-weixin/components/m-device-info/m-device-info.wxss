@@ -596,4 +596,7 @@
 .m-device-info.data-v-46399a60  .position-icon {
   font-size: 68rpx;
 }
+.m-device-info .right.data-v-46399a60 {
+  border-color: #ccc !important;
+}
 

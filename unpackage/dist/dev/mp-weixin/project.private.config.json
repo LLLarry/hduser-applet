@@ -2,7 +2,28 @@
     "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
     "projectname": "hduser-applet",
     "setting": {
-        "compileHotReLoad": true
+        "compileHotReLoad": true,
+        "urlCheck": false
     },
-    "libVersion": "2.27.0"
+    "libVersion": "2.27.0",
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "",
+                    "pathName": "pages/device/device",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/incoins/incoins",
+                    "query": "deviceId=009506&port=1&name=123&merid=1997771&phonenum=4006315515",
+                    "launchMode": "default",
+                    "scene": null
+                }
+            ]
+        }
+    }
 }

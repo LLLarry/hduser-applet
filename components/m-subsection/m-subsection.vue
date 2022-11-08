@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import { getElementInfo } from '@/uitls/index.js'
+	import { getElementInfo } from '@/utils/index.js'
 	export default {
 		name:"m-subsection",
 		props: {

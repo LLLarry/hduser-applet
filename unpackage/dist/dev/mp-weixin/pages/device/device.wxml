@@ -1,0 +1,1 @@
+<view class="container"><image src="{{senceimg}}" mode="widthFix"></image><button data-event-opts="{{[['tap',[['scanQrcodeConnect',['$event']]]]]}}" class="scanQrcode" catchtap="__e">扫码连接</button></view>

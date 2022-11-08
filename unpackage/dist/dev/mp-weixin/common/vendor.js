@@ -18343,13 +18343,1354 @@ platform = 'mp';var _default =
 platform;exports.default = _default;
 
 /***/ }),
-/* 136 */,
-/* 137 */,
-/* 138 */,
+/* 136 */
+/*!*******************************************************************!*\
+  !*** C:/Users/Acer/Desktop/hd/hduser-applet/polyfill/polyfill.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {/*
+ * @Author: zhang peng
+ * @Date: 2021-08-03 10:57:51
+ * @LastEditTime: 2022-05-13 19:02:23
+ * @LastEditors: zhang peng
+ * @Description:
+ * @FilePath: \miniprogram-to-uniapp\src\project\template\polyfill\polyfill.js
+ *
+ * Api polyfill
+ * 2021-03-06
+ * 因小程序转换到uniapp，再运行到各平台时，总有这样那样的api，没法支持，
+ * 现根据uniapp文档对各平台的支持度，或实现，或调用success来抹平各平台的差异，
+ * 让代码能正常运行，下一步再解决这些api的兼容问题。
+ *
+ * Author: 375890534@qq.com
+ */
+var base64Binary = __webpack_require__(/*! ./base64Binary */ 137);
+
+/**
+                                               * 获取guid
+                                               */
+function guid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0,
+    v = c == 'x' ? r : r & 0x3 | 0x8;
+    return v.toString(16);
+  });
+}
+
+/**
+   * 检查api是否未实现，没实现返回true
+   * @param {Object} api
+   */
+function isApiNotImplemented(api) {
+  return uni[api] === undefined ||  true && uni[api].toString().indexOf("is not yet implemented") > -1;
+}
+
+/**
+   * 条件编译
+   */
+function platformPolyfill() {
+
+
+
+
+
+}
+
+
+/**
+   * 登录相关api polyfill
+   */
+function loginPolyfill() {
+  if (isApiNotImplemented("login")) {
+    uni.login = function (options) {
+      console.warn("api: uni.login 登录 在当前平台不支持，【关键流程函数】 回调成功");
+      options.success && options.success({
+        code: guid(),
+        errMsg: "login:ok" });
+
+    };
+  }
+
+  if (isApiNotImplemented("checkSession")) {
+    uni.checkSession = function (options) {
+      console.warn("api: uni.checkSession 检查登录状态是否过期 在当前平台不支持，【关键流程函数】 回调成功");
+      options.success && options.success();
+    };
+  }
+
+  if (isApiNotImplemented("getUserInfo")) {
+    uni.getUserInfo = function (options) {
+      console.warn("api: uni.getUserInfo 获取用户信息 在当前平台不支持，【关键流程函数】回调成功");
+      options.success && options.success({
+        userInfo: "" });
+
+    };
+  }
+  if (isApiNotImplemented("getUserProfile")) {
+    uni.getUserProfile = function (options) {
+      console.warn("api: uni.getUserProfile 获取用户授权信息 在当前平台不支持，【关键流程函数】回调成功");
+      options.success && options.success({
+        userInfo: "" });
+
+    };
+  }
+}
+
+/**
+   * 地图相关
+   */
+function mapPolyfill() {
+  if (isApiNotImplemented("chooseLocation")) {
+    uni.chooseLocation = function (options) {
+      console.warn("api: uni.chooseLocation 打开地图选择位置 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("openLocation")) {
+    uni.openLocation = function (object) {
+      console.warn("api: uni.openLocation 使用应用内置地图查看位置 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("createMapContext")) {
+    uni.createMapContext = function (mapId) {
+      console.warn("api: uni.createMapContext 创建并返回 map 上下文 mapContext 对象 在当前平台不支持，返回空");
+      return {
+        $getAppMap: null,
+        getCenterLocation: function getCenterLocation(options) {
+          options.fail && options.fail();
+        },
+        moveToLocation: function moveToLocation(options) {
+          options.fail && options.fail();
+        },
+        translateMarker: function translateMarker(options) {
+          options.fail && options.fail();
+        },
+        includePoints: function includePoints(options) {},
+        getRegion: function getRegion(options) {
+          options.fail && options.fail();
+        },
+        getScale: function getScale(options) {
+          options.fail && options.fail();
+        } };
+
+    };
+  }
+}
+
+/**
+   * 字符编码
+   */
+function base64Polyfill() {
+  //将 Base64 字符串转成 ArrayBuffer 对象
+  if (isApiNotImplemented("base64ToArrayBuffer")) {
+    uni.base64ToArrayBuffer = function (base64) {
+      return base64Binary.base64ToArrayBuffer(base64);
+    };
+  }
+
+  //将 ArrayBuffer 对象转成 Base64 字符串
+  if (isApiNotImplemented("arrayBufferToBase64")) {
+    uni.arrayBufferToBase64 = function (buffer) {
+      return base64Binary.arrayBufferToBase64(buffer);
+    };
+  }
+}
+
+
+/**
+   * 媒体相关
+   */
+function mediaPolyfill() {
+  if (isApiNotImplemented("saveImageToPhotosAlbum")) {
+    uni.saveImageToPhotosAlbum = function (options) {
+      console.warn("api: uni.saveImageToPhotosAlbum 保存图片到系统相册 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("compressImage")) {
+    uni.compressImage = function (object) {
+      console.warn("api: uni.compressImage 压缩图片接口 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("chooseMessageFile")) {
+    //从微信聊天会话中选择文件。
+    uni.chooseMessageFile = function (object) {
+      console.warn("api: uni.chooseMessageFile 从微信聊天会话中选择文件。 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("getRecorderManager")) {
+    //获取全局唯一的录音管理器 recorderManager
+    uni.getRecorderManager = function (object) {
+      console.warn("api: uni.getRecorderManager 获取全局唯一的录音管理器 在当前平台不支持");
+    };
+  }
+
+  if (isApiNotImplemented("getBackgroundAudioManager")) {
+    //获取全局唯一的背景音频管理器 backgroundAudioManager
+    uni.getBackgroundAudioManager = function (object) {
+      console.warn("api: uni.getBackgroundAudioManager 获取全局唯一的背景音频管理器 在当前平台不支持");
+    };
+  }
+
+  if (isApiNotImplemented("chooseMedia")) {
+    // 拍摄或从手机相册中选择图片或视频
+    uni.chooseMedia = function (object) {
+      console.warn("api: uni.chooseMedia 拍摄或从手机相册中选择图片或视频 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("saveVideoToPhotosAlbum")) {
+    // 保存视频到系统相册
+    uni.saveVideoToPhotosAlbum = function (object) {
+      console.warn("api: uni.saveVideoToPhotosAlbum 保存视频到系统相册 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("getVideoInfo")) {
+    // 获取视频详细信息
+    uni.getVideoInfo = function (object) {
+      console.warn("api: uni.getVideoInfo 获取视频详细信息 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("compressVideo")) {
+    // 压缩视频接口
+    uni.compressVideo = function (object) {
+      console.warn("api: uni.compressVideo 压缩视频接口 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+
+
+  if (isApiNotImplemented("openVideoEditor")) {
+    // 打开视频编辑器
+    uni.openVideoEditor = function (object) {
+      console.warn("api: uni.openVideoEditor 打开视频编辑器 在当前平台不支持，回调失败");
+      options.fail && options.fail();
+    };
+  }
+}
+
+/**
+   * 设备
+   */
+function devicePolyfill() {
+  if (isApiNotImplemented("canIUse")) {
+    // 判断应用的 API，回调，参数，组件等是否在当前版本可用。
+    // h5时，恒返回true
+    uni.canIUse = function (object) {
+      console.warn("api: uni.canIUse 判断API在当前平台是否可用 返回true");
+      return true;
+    };
+  }
+
+  //微信小程序
+  if (isApiNotImplemented("startDeviceMotionListening")) {
+    // 开始监听设备方向的变化
+    uni.startDeviceMotionListening = function (options) {
+      console.warn("api: uni.startDeviceMotionListening 开始监听设备方向的变化 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+
+  if (isApiNotImplemented("onMemoryWarning")) {
+    // 监听内存不足告警事件。
+    uni.onMemoryWarning = function (callback) {
+      console.warn("监听内存不足告警事件，仅支持微信小程序、支付宝小程序、百度小程序、QQ小程序，当前平台不支持，已注释");
+    };
+  }
+
+  if (isApiNotImplemented("offNetworkStatusChange")) {
+    // 取消监听网络状态变化
+    uni.offNetworkStatusChange = function (callback) {};
+  }
+  if (isApiNotImplemented("offAccelerometerChange")) {
+    // 取消监听加速度数据。
+    uni.offAccelerometerChange = function (callback) {};
+  }
+  if (isApiNotImplemented("startAccelerometer")) {
+    // 开始监听加速度数据。
+    uni.startAccelerometer = function (callback) {
+      console.warn("api: uni.startAccelerometer 开始监听加速度数据 在当前平台不支持");
+    };
+  }
+
+  if (isApiNotImplemented("offCompassChange")) {
+    // 取消监听罗盘数据
+    uni.offCompassChange = function (callback) {
+      console.warn("api: uni.offCompassChange 取消监听罗盘数据 在当前平台不支持");
+    };
+  }
+
+  if (isApiNotImplemented("startCompass")) {
+    // 开始监听罗盘数据
+    uni.startCompass = function (callback) {
+      console.warn("api: uni.startCompass 开始监听罗盘数据 在当前平台不支持");
+    };
+  }
+
+
+  if (isApiNotImplemented("onGyroscopeChange")) {
+    // 监听陀螺仪数据变化事件
+    uni.onGyroscopeChange = function (callback) {
+      console.warn("api: uni.onGyroscopeChange 监听陀螺仪数据变化事件 在当前平台不支持");
+    };
+  }
+
+  if (isApiNotImplemented("startGyroscope")) {
+    // 开始监听陀螺仪数据
+    uni.startGyroscope = function (callback) {
+      console.warn("api: uni.startGyroscope 监听陀螺仪数据变化事件 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("stopGyroscope")) {
+    // 停止监听陀螺仪数据
+    uni.stopGyroscope = function (callback) {
+      console.warn("api: uni.stopGyroscope 停止监听陀螺仪数据 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("scanCode")) {
+    // 调起客户端扫码界面，扫码成功后返回对应的结果
+    uni.scanCode = function (callback) {
+      console.warn("api: uni.scanCode 扫描二维码 在当前平台不支持");
+    };
+  }
+
+  if (isApiNotImplemented("setClipboardData")) {
+    // 设置系统剪贴板的内容
+    uni.setClipboardData = function (callback) {
+      console.warn("api: uni.setClipboardData 设置系统剪贴板的内容 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getClipboardData")) {
+    // 获取系统剪贴板内容
+    uni.getClipboardData = function (callback) {
+      console.warn("api: uni.getClipboardData 获取系统剪贴板内容 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("setScreenBrightness")) {
+    // 设置屏幕亮度
+    uni.setScreenBrightness = function (callback) {
+      console.warn("api: uni.setScreenBrightness 设置屏幕亮度 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getScreenBrightness")) {
+    // 获取屏幕亮度
+    uni.getScreenBrightness = function (callback) {
+      console.warn("api: uni.getScreenBrightness 获取屏幕亮度 在当前平台不支持");
+    };
+  }
+
+  if (isApiNotImplemented("setKeepScreenOn")) {
+    // 设置是否保持常亮状态
+    uni.setKeepScreenOn = function (callback) {
+      console.warn("api: uni.setKeepScreenOn 设置是否保持常亮状态 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("onUserCaptureScreen")) {
+    // 监听用户主动截屏事件
+    uni.onUserCaptureScreen = function (callback) {
+      console.warn("api: uni.onUserCaptureScreen 监听用户主动截屏事件 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("addPhoneContact")) {
+    // 添加联系人
+    uni.addPhoneContact = function (callback) {
+      console.warn("api: uni.addPhoneContact 添加联系人 在当前平台不支持");
+    };
+  }
+}
+
+/**
+   * 界面相关
+   */
+function uiPolyfill() {
+  if (isApiNotImplemented("hideNavigationBarLoading")) {
+    // 在当前页面隐藏导航条加载动画
+    uni.hideNavigationBarLoading = function (options) {
+      console.warn("api: uni.hideNavigationBarLoading 在当前页面隐藏导航条加载动画 在当前平台不支持，回调成功");
+      options.success && options.success();
+    };
+  }
+  if (isApiNotImplemented("hideHomeButton")) {
+    // 隐藏返回首页按钮
+    uni.hideHomeButton = function (options) {
+      console.warn("api: uni.hideHomeButton 隐藏返回首页按钮 在当前平台不支持，回调成功");
+      options.success && options.success();
+    };
+  }
+
+  if (isApiNotImplemented("setTabBarItem")) {
+    // 动态设置 tabBar 某一项的内容
+    uni.setTabBarItem = function (options) {
+      console.warn("api: uni.setTabBarItem 动态设置 tabBar 某一项的内容 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("setTabBarStyle")) {
+    // 动态设置 tabBar 的整体样式
+    uni.setTabBarStyle = function (options) {
+      console.warn("api: uni.setTabBarStyle 动态设置 tabBar 的整体样式 在当前平台不支持，回调成功");
+      options.success && options.success();
+    };
+  }
+
+  if (isApiNotImplemented("hideTabBar")) {
+    // 隐藏 tabBar
+    uni.hideTabBar = function (options) {
+      console.warn("api: uni.hideTabBar 隐藏 tabBar 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+
+
+  if (isApiNotImplemented("showTabBar")) {
+    // 显示 tabBar
+    uni.showTabBar = function (options) {
+      console.warn("api: uni.showTabBar 显示 tabBar 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("setTabBarBadge")) {
+    // 为 tabBar 某一项的右上角添加文本
+    uni.setTabBarBadge = function (options) {
+      console.warn("api: uni.setTabBarBadge 为 tabBar 某一项的右上角添加文本 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("removeTabBarBadge")) {
+    // 移除 tabBar 某一项右上角的文本
+    uni.removeTabBarBadge = function (options) {
+      console.warn("api: uni.removeTabBarBadge 移除 tabBar 某一项右上角的文本 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("showTabBarRedDot")) {
+    // 显示 tabBar 某一项的右上角的红点
+    uni.showTabBarRedDot = function (options) {
+      console.warn("api: uni.showTabBarRedDot 显示 tabBar 某一项的右上角的红点 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("hideTabBarRedDot")) {
+    // 隐藏 tabBar 某一项的右上角的红点
+    uni.hideTabBarRedDot = function (options) {
+      console.warn("api: uni.hideTabBarRedDot 隐藏 tabBar 某一项的右上角的红点 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  ///////////////////////////////
+  if (isApiNotImplemented("setBackgroundColor")) {
+    // 动态设置窗口的背景色
+    uni.setBackgroundColor = function (options) {
+      console.warn("api: uni.setBackgroundColor 动态设置窗口的背景色 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("setBackgroundTextStyle")) {
+    // 动态设置下拉背景字体、loading 图的样式
+    uni.setBackgroundTextStyle = function (options) {
+      console.warn("api: uni.setBackgroundTextStyle 动态设置下拉背景字体、loading 图的样式 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("onWindowResize")) {
+    // 监听窗口尺寸变化事件
+    uni.onWindowResize = function (callback) {
+      console.warn("api: uni.onWindowResize 监听窗口尺寸变化事件 在当前平台不支持，执行失败");
+      callback && callback();
+    };
+  }
+  if (isApiNotImplemented("offWindowResize")) {
+    // 取消监听窗口尺寸变化事件
+    uni.offWindowResize = function (callback) {
+      console.warn("api: uni.offWindowResize 取消监听窗口尺寸变化事件 在当前平台不支持，执行失败");
+      callback && callback();
+    };
+  }
+  if (isApiNotImplemented("loadFontFace")) {
+    // 动态加载网络字体
+    uni.loadFontFace = function (options) {
+      console.warn("api: uni.loadFontFace 动态加载网络字体 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("getMenuButtonBoundingClientRect")) {
+    // 微信胶囊按钮布局信息
+    uni.getMenuButtonBoundingClientRect = function () {
+      console.warn("api: uni.getMenuButtonBoundingClientRect 微信胶囊按钮布局信息 在当前平台不支持，执行失败");
+    };
+  }
+}
+/**
+   * file
+   */
+function filePolyfill() {
+  if (isApiNotImplemented("saveFile")) {
+    // 保存文件到本地
+    uni.saveFile = function (options) {
+      console.warn("api: uni.saveFile 保存文件到本地 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("getSavedFileList")) {
+    // 获取本地已保存的文件列表
+    uni.getSavedFileList = function (options) {
+      console.warn("api: uni.getSavedFileList 获取本地已保存的文件列表 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("getSavedFileInfo")) {
+    // 获取本地文件的文件信息
+    uni.getSavedFileInfo = function (options) {
+      console.warn("api: uni.getSavedFileInfo 获取本地文件的文件信息 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("removeSavedFile")) {
+    // 删除本地存储的文件
+    uni.removeSavedFile = function (options) {
+      console.warn("api: uni.removeSavedFile 删除本地存储的文件 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("getFileInfo")) {
+    // 获取文件信息
+    uni.getFileInfo = function (options) {
+      console.warn("api: uni.getFileInfo 获取文件信息 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("openDocument")) {
+    // 新开页面打开文档
+    uni.openDocument = function (options) {
+      console.warn("api: uni.openDocument 新开页面打开文档 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("getFileSystemManager")) {
+    // 获取全局唯一的文件管理器
+    uni.getFileSystemManager = function () {
+      console.warn("api: uni.getFileSystemManager 获取全局唯一的文件管理器 在当前平台不支持，执行失败");
+    };
+  }
+}
+
+/**
+   * canvas
+   */
+function canvasPolyfill() {
+  if (isApiNotImplemented("createOffscreenCanvas")) {
+    // 创建离屏 canvas 实例
+    uni.createOffscreenCanvas = function () {
+      console.warn("api: uni.createOffscreenCanvas 创建离屏 canvas 实例 在当前平台不支持，执行失败");
+    };
+  }
+
+  if (isApiNotImplemented("canvasToTempFilePath")) {
+    // 把当前画布指定区域的内容导出生成指定大小的图片
+    uni.canvasToTempFilePath = function () {
+      console.warn("api: uni.canvasToTempFilePath 把当前画布指定区域的内容导出生成指定大小的图片 在当前平台不支持，执行失败");
+    };
+  }
+}
+
+/**
+   * Ad广告
+   */
+function adPolyfill() {
+  if (isApiNotImplemented("createRewardedVideoAd")) {
+    // 激励视频广告
+    uni.createRewardedVideoAd = function () {
+      console.warn("api: uni.createRewardedVideoAd 激励视频广告 在当前平台不支持，执行失败");
+      return {
+        show: function show() {},
+        onLoad: function onLoad() {},
+        offLoad: function offLoad() {},
+        load: function load() {},
+        onError: function onError() {},
+        offError: function offError() {},
+        onClose: function onClose() {},
+        offClose: function offClose() {} };
+
+    };
+  }
+  if (isApiNotImplemented("createInterstitialAd")) {
+    // 插屏广告组件
+    uni.createInterstitialAd = function () {
+      console.warn("api: uni.createInterstitialAd 插屏广告组件 在当前平台不支持，执行失败");
+    };
+  }
+}
+
+/**
+   * 第三方
+   */
+function pluginsPolyfill() {
+  if (isApiNotImplemented("getProvider")) {
+    // 获取服务供应商
+    uni.getProvider = function (options) {
+      console.warn("api: uni.getProvider 获取服务供应商 在当前平台不支持，执行失败");
+      options && options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("showShareMenu")) {
+    // 小程序的原生菜单中显示分享按钮
+    uni.showShareMenu = function (options) {
+      console.warn("api: uni.showShareMenu 小程序的原生菜单中显示分享按钮 在当前平台不支持，执行失败");
+      options && options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("hideShareMenu")) {
+    // 小程序的原生菜单中显示分享按钮
+    uni.hideShareMenu = function (options) {
+      console.warn("api: uni.hideShareMenu 小程序的原生菜单中隐藏分享按钮 在当前平台不支持，执行失败");
+      options && options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("requestPayment")) {
+    // 支付
+    uni.requestPayment = function (options) {
+      console.error("api: uni.requestPayment 支付 在当前平台不支持(需自行参考文档封装)，执行失败");
+      options && options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("createWorker")) {
+    // 创建一个 Worker 线程
+    uni.createWorker = function () {
+      console.error("api: uni.createWorker 创建一个 Worker 线程 在当前平台不支持，执行失败");
+    };
+  }
+}
+
+/**
+   * 其他
+   */
+function otherPolyfill() {
+  if (isApiNotImplemented("authorize")) {
+    // 提前向用户发起授权请求
+    uni.authorize = function (options) {
+      console.warn("api: uni.authorize 提前向用户发起授权请求 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("openSetting")) {
+    // 调起客户端小程序设置界面
+    uni.openSetting = function (options) {
+      console.warn("api: uni.openSetting 调起客户端小程序设置界面 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("getSetting")) {
+    // 获取用户的当前设置
+    uni.getSetting = function (options) {
+      console.warn("api: uni.getSetting 获取用户的当前设置 在当前平台不支持，【关键流程函数】回调成功");
+      options.success && options.success({
+        authSetting: {
+          scope: {
+            userInfo: false } } });
+
+
+
+    };
+  }
+
+  if (isApiNotImplemented("chooseAddress")) {
+    // 获取用户收货地址
+    uni.chooseAddress = function (options) {
+      console.warn("api: uni.chooseAddress 获取用户收货地址 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("chooseInvoiceTitle")) {
+    // 选择用户的发票抬头
+    uni.chooseInvoiceTitle = function (options) {
+      console.warn("api: uni.chooseInvoiceTitle 选择用户的发票抬头 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("navigateToMiniProgram")) {
+    // 打开另一个小程序
+    uni.navigateToMiniProgram = function (options) {
+      console.warn("api: uni.navigateToMiniProgram 打开另一个小程序 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("navigateBackMiniProgram")) {
+    // 跳转回上一个小程序
+    uni.navigateBackMiniProgram = function (options) {
+      console.warn("api: uni.navigateBackMiniProgram 跳转回上一个小程序 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("getAccountInfoSync")) {
+    // 获取当前帐号信息
+    uni.getAccountInfoSync = function (options) {
+      console.warn("api: uni.getAccountInfoSync 获取当前帐号信息 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+
+  if (isApiNotImplemented("requestSubscribeMessage")) {
+    // 订阅消息
+    uni.requestSubscribeMessage = function (options) {
+      console.warn("api: uni.requestSubscribeMessage 订阅消息 在当前平台不支持，执行失败");
+      options.fail && options.fail();
+    };
+  }
+  if (isApiNotImplemented("getUpdateManager")) {
+    // 管理小程序更新
+    uni.getUpdateManager = function (options) {
+      console.error("api: uni.getUpdateManager 管理小程序更新 在当前平台不支持，执行失败");
+    };
+  }
+  if (isApiNotImplemented("setEnableDebug")) {
+    // 设置是否打开调试开关
+    uni.setEnableDebug = function (options) {
+      console.error("api: uni.setEnableDebug 设置是否打开调试开关 在当前平台不支持，执行失败");
+    };
+  }
+  if (isApiNotImplemented("getExtConfig")) {
+    // 获取第三方平台自定义的数据字段
+    uni.getExtConfig = function (options) {
+      console.error("api: uni.getExtConfig 获取第三方平台自定义的数据字段 在当前平台不支持，执行失败");
+    };
+  }
+  if (isApiNotImplemented("getExtConfigSync")) {
+    // uni.getExtConfig 的同步版本
+    uni.getExtConfigSync = function (options) {
+      console.error("api: uni.getExtConfigSync uni.getExtConfig 的同步版本 在当前平台不支持，执行失败");
+    };
+  }
+}
+
+/**
+   * 认证
+   */
+function soterAuthPolyfill() {
+  if (isApiNotImplemented("startSoterAuthentication")) {
+    // 开始 SOTER 生物认证
+    uni.startSoterAuthentication = function (options) {
+      console.warn("api: uni.startSoterAuthentication 开始 SOTER 生物认证 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+  if (isApiNotImplemented("checkIsSupportSoterAuthentication")) {
+    // 获取本机支持的 SOTER 生物认证方式
+    uni.checkIsSupportSoterAuthentication = function (options) {
+      console.warn("api: uni.checkIsSupportSoterAuthentication 开获取本机支持的 SOTER 生物认证方式 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+  if (isApiNotImplemented("checkIsSoterEnrolledInDevice")) {
+    // 获取设备内是否录入如指纹等生物信息的接口
+    uni.checkIsSoterEnrolledInDevice = function (options) {
+      console.warn("api: uni.checkIsSoterEnrolledInDevice 获取设备内是否录入如指纹等生物信息的接口 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+}
+
+/**
+   * nfc
+   */
+function nfcPolyfill() {
+  //微信小程序
+  if (isApiNotImplemented("startHCE")) {
+    // 初始化 NFC 模块
+    uni.startHCE = function (options) {
+      console.warn("api: uni.startHCE 初始化 NFC 模块 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+}
+
+/**
+   * 电量
+   */
+function batteryPolyfill() {
+  //微信小程序
+  if (isApiNotImplemented("getBatteryInfo")) {
+    // 获取设备电量
+    uni.getBatteryInfo = function (options) {
+      console.warn("api: uni.getBatteryInfo 获取设备电量 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+  //微信小程序
+  if (isApiNotImplemented("getBatteryInfoSync")) {
+    // 同步获取设备电量
+    uni.getBatteryInfoSync = function (options) {
+      console.warn("api: uni.getBatteryInfoSync 同步获取设备电量 在当前平台不支持");
+    };
+  }
+}
+
+/**
+   * wifi
+   */
+function wifiPolyfill() {
+  //微信小程序
+  if (isApiNotImplemented("startWifi")) {
+    // 初始化 Wi-Fi 模块
+    uni.startWifi = function (options) {
+      console.warn("api: uni.startWifi 初始化 Wi-Fi 模块 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+  //字节跳动
+  if (isApiNotImplemented("getConnectedWifi")) {
+    // 获取设备当前所连的 WiFi 信息
+    uni.getConnectedWifi = function (options) {
+      console.warn("api: uni.getConnectedWifi 初获取设备当前所连的 WiFi 信息 在当前平台不支持");
+      options.success && options.success();
+    };
+  }
+}
+
+/**
+   * 蓝牙
+   */
+function bluetoothPolyfill() {
+  //蓝牙
+  if (isApiNotImplemented("openBluetoothAdapter")) {
+    // 初始化蓝牙模块
+    uni.openBluetoothAdapter = function (object) {
+      console.warn("api: uni.openBluetoothAdapter 初始化蓝牙模块 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("startBluetoothDevicesDiscovery")) {
+    // 开始搜寻附近的蓝牙外围设备
+    uni.startBluetoothDevicesDiscovery = function (callback) {
+      console.warn("api: uni.startBluetoothDevicesDiscovery 开始搜寻附近的蓝牙外围设备 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("onBluetoothDeviceFound")) {
+    // 监听寻找到新设备的事件
+    uni.onBluetoothDeviceFound = function (callback) {
+      console.warn("api: uni.onBluetoothDeviceFound 监听寻找到新设备的事件 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("stopBluetoothDevicesDiscovery")) {
+    // 停止搜寻附近的蓝牙外围设备
+    uni.stopBluetoothDevicesDiscovery = function (callback) {
+      console.warn("api: uni.stopBluetoothDevicesDiscovery 停止搜寻附近的蓝牙外围设备 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("onBluetoothAdapterStateChange")) {
+    // 监听蓝牙适配器状态变化事件
+    uni.onBluetoothAdapterStateChange = function (callback) {
+      console.warn("api: uni.onBluetoothAdapterStateChange 监听蓝牙适配器状态变化事件 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getConnectedBluetoothDevices")) {
+    // 根据 uuid 获取处于已连接状态的设备
+    uni.getConnectedBluetoothDevices = function (callback) {
+      console.warn("api: uni.getConnectedBluetoothDevices 根据 uuid 获取处于已连接状态的设备 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getBluetoothDevices")) {
+    // 获取在蓝牙模块生效期间所有已发现的蓝牙设备
+    uni.getBluetoothDevices = function (callback) {
+      console.warn("api: uni.getBluetoothDevices 获取在蓝牙模块生效期间所有已发现的蓝牙设备 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getBluetoothAdapterState")) {
+    // 获取本机蓝牙适配器状态
+    uni.getBluetoothAdapterState = function (callback) {
+      console.warn("api: uni.getBluetoothAdapterState 获取本机蓝牙适配器状态 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("closeBluetoothAdapter")) {
+    // 关闭蓝牙模块
+    uni.closeBluetoothAdapter = function (callback) {
+      console.warn("api: uni.closeBluetoothAdapter 关闭蓝牙模块 在当前平台不支持");
+    };
+  }
+}
+
+/**
+   * 低功耗蓝牙
+   */
+function blePolyfill() {
+  if (isApiNotImplemented("setBLEMTU")) {
+    // 设置蓝牙最大传输单元
+    uni.setBLEMTU = function (callback) {
+      console.warn("api: uni.setBLEMTU 设置蓝牙最大传输单元 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("readBLECharacteristicValue")) {
+    // 读取低功耗蓝牙设备的特征值的二进制数据值
+    uni.readBLECharacteristicValue = function (callback) {
+      console.warn("api: uni.readBLECharacteristicValue 读取低功耗蓝牙设备的特征值的二进制数据值 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("onBLEConnectionStateChange")) {
+    // 关闭蓝牙模块
+    uni.onBLEConnectionStateChange = function (callback) {
+      console.warn("api: uni.onBLEConnectionStateChange 监听低功耗蓝牙连接状态的改变事件 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("notifyBLECharacteristicValueChange")) {
+    // 启用低功耗蓝牙设备特征值变化时的 notify 功能
+    uni.notifyBLECharacteristicValueChange = function (callback) {
+      console.warn("api: uni.notifyBLECharacteristicValueChange 启用低功耗蓝牙设备特征值变化时的 notify 功能 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getBLEDeviceServices")) {
+    // 获取蓝牙设备所有服务
+    uni.getBLEDeviceServices = function (callback) {
+      console.warn("api: uni.getBLEDeviceServices 获取蓝牙设备所有服务 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getBLEDeviceRSSI")) {
+    // 获取蓝牙设备的信号强度
+    uni.getBLEDeviceRSSI = function (callback) {
+      console.warn("api: uni.getBLEDeviceRSSI 获取蓝牙设备的信号强度 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("createBLEConnection")) {
+    // 连接低功耗蓝牙设备
+    uni.createBLEConnection = function (callback) {
+      console.warn("api: uni.createBLEConnection 连接低功耗蓝牙设备 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("closeBLEConnection")) {
+    // 断开与低功耗蓝牙设备的连接
+    uni.closeBLEConnection = function (callback) {
+      console.warn("api: uni.closeBLEConnection 断开与低功耗蓝牙设备的连接 在当前平台不支持");
+    };
+  }
+}
+
+/**
+   * iBeacon
+   */
+function iBeaconPolyfill() {
+  if (isApiNotImplemented("onBeaconServiceChange")) {
+    // 监听 iBeacon 服务状态变化事件
+    uni.onBeaconServiceChange = function (callback) {
+      console.warn("api: uni.onBeaconServiceChange 监听 iBeacon 服务状态变化事件 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("onBeaconUpdate")) {
+    // 监听 iBeacon 设备更新事件
+    uni.onBeaconUpdate = function (callback) {
+      console.warn("api: uni.onBeaconUpdate 监听 iBeacon 设备更新事件 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("getBeacons")) {
+    // 获取所有已搜索到的 iBeacon 设备
+    uni.getBeacons = function (callback) {
+      console.warn("api: uni.getBeacons 获取所有已搜索到的 iBeacon 设备 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("startBeaconDiscovery")) {
+    // 开始搜索附近的 iBeacon 设备
+    uni.startBeaconDiscovery = function (callback) {
+      console.warn("api: uni.startBeaconDiscovery 开始搜索附近的 iBeacon 设备 在当前平台不支持");
+    };
+  }
+  if (isApiNotImplemented("stopBeaconDiscovery")) {
+    // 停止搜索附近的 iBeacon 设备
+    uni.stopBeaconDiscovery = function (callback) {
+      console.warn("api: uni.stopBeaconDiscovery 停止搜索附近的 iBeacon 设备 在当前平台不支持");
+    };
+  }
+}
+
+/**
+  * uni.navigateTo 和 uni.redirectTo 不能直接跳转tabbar里面的页面，拦截fail，并当它为tabbar页面时，直接调用uni.switchTab()
+  */
+function routerPolyfill() {
+  var routerApiFailEventHandle = function routerApiFailEventHandle(res, options) {
+    if (res.errMsg.indexOf('tabbar page') > -1) {
+      console.error('res.errMsg: ' + res.errMsg);
+      var apiName = res.errMsg.match(/not\s(\w+)\sa/)[1];
+      console.log(apiName);
+      var url = options.url;
+      if (url) {
+        var queryString = url.split('?')[1];
+        if (queryString) {
+          console.error(apiName + " 的参数将被忽略：" + queryString);
+        }
+        uni.switchTab({
+          url: url });
+
+      }
+    }
+  };
+
+  var routerApiHandle = function routerApiHandle(oriLogFunc) {
+    return function (options) {
+      try {
+        if (options.fail) {
+          options.fail = function fail(failFun) {
+            return function (res) {
+              routerApiFailEventHandle(res, options);
+              failFun(res);
+            };
+          }(options.fail);
+        } else {
+          options.fail = function (res) {
+            routerApiFailEventHandle(res, options);
+          };
+        }
+        oriLogFunc.call(oriLogFunc, options);
+      } catch (e) {
+        console.error('uni.navigateTo or uni.redirectTo error', e);
+      }
+    };
+  };
+
+  uni.navigateTo = routerApiHandle(uni.navigateTo);
+  uni.redirectTo = routerApiHandle(uni.redirectTo);
+}
+
+var isInit = false;
+/**
+                     * polyfill 入口
+                     */
+function init() {
+  if (isInit) return;
+  isInit = true;
+
+  console.log("Api polyfill start");
+  //条件编译
+  platformPolyfill();
+  //登录
+  loginPolyfill();
+  //base64
+  base64Polyfill();
+  //地图
+  mapPolyfill();
+  //设备
+  devicePolyfill();
+
+  //媒体相关
+  mediaPolyfill();
+
+  //蓝牙
+  bluetoothPolyfill();
+  //低功耗蓝牙
+  blePolyfill();
+  //iBeacon
+  iBeaconPolyfill();
+  //wifi
+  wifiPolyfill();
+  //电量信息
+  batteryPolyfill();
+  //nfc
+  nfcPolyfill();
+  //auth
+  soterAuthPolyfill();
+
+  //ui
+  uiPolyfill();
+  //file
+  filePolyfill();
+  //canvas
+  canvasPolyfill();
+  //ad
+  adPolyfill();
+  //plugins
+  pluginsPolyfill();
+  //other
+  otherPolyfill();
+
+  //router
+  routerPolyfill();
+}
+
+
+module.exports = {
+  init: init,
+  guid: guid };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 137 */
+/*!***********************************************************************!*\
+  !*** C:/Users/Acer/Desktop/hd/hduser-applet/polyfill/base64Binary.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @Author: zhang peng
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @Date: 2021-08-03 10:57:51
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @LastEditTime: 2021-08-16 17:25:43
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @LastEditors: zhang peng
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @Description:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @FilePath: \miniprogram-to-uniapp2\src\project\template\polyfill\base64Binary.js
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 借鉴自：https://github.com/dankogai/js-base64/blob/main/base64.js
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 因uniapp没有window，也无法使用Buffer，因此直接使用polyfill
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+var b64ch = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+var b64chs = _toConsumableArray(b64ch);
+var b64re = /^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/;
+var b64tab = function (a) {
+  var tab = {};
+  a.forEach(function (c, i) {return tab[c] = i;});
+  return tab;
+}(b64chs);
+var _fromCC = String.fromCharCode.bind(String);
+
+/**
+                                                 * polyfill version of `btoa`
+                                                 */
+var btoaPolyfill = function btoaPolyfill(bin) {
+  // console.log('polyfilled');
+  var u32,c0,c1,c2,asc = '';
+  var pad = bin.length % 3;
+  for (var i = 0; i < bin.length;) {
+    if ((c0 = bin.charCodeAt(i++)) > 255 ||
+    (c1 = bin.charCodeAt(i++)) > 255 ||
+    (c2 = bin.charCodeAt(i++)) > 255)
+    throw new TypeError('invalid character found');
+    u32 = c0 << 16 | c1 << 8 | c2;
+    asc += b64chs[u32 >> 18 & 63] +
+    b64chs[u32 >> 12 & 63] +
+    b64chs[u32 >> 6 & 63] +
+    b64chs[u32 & 63];
+  }
+  return pad ? asc.slice(0, pad - 3) + "===".substring(pad) : asc;
+};
+
+/**
+    * polyfill version of `atob`
+    */
+var atobPolyfill = function atobPolyfill(asc) {
+  // console.log('polyfilled');
+  asc = asc.replace(/\s+/g, '');
+  if (!b64re.test(asc))
+  throw new TypeError('malformed base64.');
+  asc += '=='.slice(2 - (asc.length & 3));
+  var u24,bin = '',r1,r2;
+  for (var i = 0; i < asc.length;) {
+    u24 = b64tab[asc.charAt(i++)] << 18 |
+    b64tab[asc.charAt(i++)] << 12 |
+    (r1 = b64tab[asc.charAt(i++)]) << 6 | (
+    r2 = b64tab[asc.charAt(i++)]);
+    bin += r1 === 64 ? _fromCC(u24 >> 16 & 255) :
+    r2 === 64 ? _fromCC(u24 >> 16 & 255, u24 >> 8 & 255) :
+    _fromCC(u24 >> 16 & 255, u24 >> 8 & 255, u24 & 255);
+  }
+  return bin;
+};
+
+/**
+    * base64转ArrayBuffer
+    */
+function base64ToArrayBuffer(base64) {
+  var binaryStr = atobPolyfill(base64);
+  var byteLength = binaryStr.length;
+  var bytes = new Uint8Array(byteLength);
+  for (var i = 0; i < byteLength; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+/**
+   * ArrayBuffer转base64
+   */
+function arrayBufferToBase64(buffer) {
+  var binaryStr = "";
+  var bytes = new Uint8Array(buffer);
+  var len = bytes.byteLength;
+  for (var i = 0; i < len; i++) {
+    binaryStr += String.fromCharCode(bytes[i]);
+  }
+  return btoaPolyfill(binaryStr);
+}
+
+module.exports = {
+  base64ToArrayBuffer: base64ToArrayBuffer,
+  arrayBufferToBase64: arrayBufferToBase64 };
+
+/***/ }),
+/* 138 */
+/*!*****************************************************************!*\
+  !*** C:/Users/Acer/Desktop/hd/hduser-applet/polyfill/mixins.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
+                                                                                                      * @Author: zhang peng
+                                                                                                      * @Date: 2021-08-03 10:57:51
+                                                                                                      * @LastEditTime: 2022-05-04 21:24:16
+                                                                                                      * @LastEditors: zhang peng
+                                                                                                      * @Description:
+                                                                                                      * @FilePath: /miniprogram-to-uniapp2/src/project/template/polyfill/mixins.js
+                                                                                                      *
+                                                                                                      * 如果你想删除本文件，请先确认它使用的范围，感谢合作~
+                                                                                                      * 如有疑问，请直接联系: 375890534@qq.com
+                                                                                                      */var _default =
+{
+  methods: {
+    /**
+              * 转义符换成普通字符
+              * @param {*} str
+              * @returns
+              */
+    escape2Html: function escape2Html(str) {
+      if (!str) return str;
+      var arrEntities = {
+        'lt': '<',
+        'gt': '>',
+        'nbsp': ' ',
+        'amp': '&',
+        'quot': '"' };
+
+      return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+        return arrEntities[t];
+      });
+    },
+    /**
+        * 普通字符转换成转义符
+        * @param {*} sHtml
+        * @returns
+        */
+    html2Escape: function html2Escape(sHtml) {
+      if (!sHtml) return sHtml;
+      return sHtml.replace(/[<>&"]/g, function (c) {
+        return {
+          '<': '&lt;',
+          '>': '&gt;',
+          '&': '&amp;',
+          '"': '&quot;' }[
+        c];
+      });
+    },
+    /**
+        * setData polyfill 勿删!!!
+        * 用于转换后的uniapp的项目能直接使用this.setData()函数
+        * @param {*} obj
+        * @param {*} callback
+        */
+    setData: function setData(obj, callback) {
+      var that = this;
+      var handleData = function handleData(tepData, tepKey, afterKey) {
+        var tepData2 = tepData;
+        tepKey = tepKey.split('.');
+        tepKey.forEach(function (item) {
+          if (tepData[item] === null || tepData[item] === undefined) {
+            var reg = /^[0-9]+$/;
+            tepData[item] = reg.test(afterKey) ? [] : {};
+            tepData2 = tepData[item];
+          } else {
+            tepData2 = tepData[item];
+          }
+        });
+        return tepData2;
+      };
+      var isFn = function isFn(value) {
+        return typeof value == 'function' || false;
+      };
+      Object.keys(obj).forEach(function (key) {
+        var val = obj[key];
+        key = key.replace(/\]/g, '').replace(/\[/g, '.');
+        var front, after;
+        var index_after = key.lastIndexOf('.');
+        if (index_after != -1) {
+          after = key.slice(index_after + 1);
+          front = handleData(that, key.slice(0, index_after), after);
+        } else {
+          after = key;
+          front = that;
+        }
+        if (front.$data && front.$data[after] === undefined) {
+          Object.defineProperty(front, after, {
+            get: function get() {
+              return front.$data[after];
+            },
+            set: function set(newValue) {
+              front.$data[after] = newValue;
+              that.hasOwnProperty("$forceUpdate") && that.$forceUpdate();
+            },
+            enumerable: true,
+            configurable: true });
+
+          front[after] = val;
+        } else {
+          that.$set(front, after, val);
+        }
+      });
+      // this.$forceUpdate();
+      isFn(callback) && this.$nextTick(callback);
+    },
+    /**
+        * 解析事件里的动态函数名，这种没有()的函数名，在uniapp不被执行
+        * 比如：<view bindtap="{{openId==undefined?'denglu':'hy_to'}}">立即</view>
+        * @param {*} exp
+        */
+    parseEventDynamicCode: function parseEventDynamicCode(e, exp) {
+      if (typeof this[exp] === 'function') {
+        this[exp](e);
+      }
+    },
+    /**
+        * 用于处理对props进行赋值的情况
+        * //简单处理一下就行了
+        *
+        * @param {*} target
+        * @returns
+        */
+    deepClone: function deepClone(target) {
+      return JSON.parse(JSON.stringify(target));
+    },
+    /**
+        * 用于处理dataset
+        * 自定义组件的事件里，是获取不到e.currentTarget.dataset的
+        * 因此收集data-参数，手动传进去
+        *
+        * @param {*} event
+        * @param {*} dataSet
+        * @returns
+        */
+    datasetHandle: function datasetHandle(event) {var dataSet = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      if (event && !event.currentTarget) {
+        if (dataSet.tagId) {
+          event.currentTarget = {
+            id: dataSet.tagId };
+
+        } else {
+          event.currentTarget = {
+            dataset: dataSet };
+
+        }
+      }
+    } } };exports.default = _default;
+
+/***/ }),
 /* 139 */,
 /* 140 */,
 /* 141 */,
-/* 142 */
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */
 /*!****************************************************************!*\
   !*** C:/Users/Acer/Desktop/hd/hduser-applet/api/home/index.js ***!
   \****************************************************************/
@@ -18357,26 +19698,43 @@ platform;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getDevicesByPoint = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/uitls/request.js */ 143));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.getEquipmentDate = exports.getDevicesByPoint = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 146));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+/**
+                                                                                                                                                                                                                                                                                                             * 获取附近坐标点的设备列表
+                                                                                                                                                                                                                                                                                                             */
 var getDevicesByPoint = function getDevicesByPoint(data) {
   return (0, _request.default)({
-    url: '/equipment/getDevicesByPosition',
+    url: '/nearby/getDevicesByPosition',
     data: data });
 
-};exports.getDevicesByPoint = getDevicesByPoint;
+};
+
+/**
+    * 获取设备详细信息
+    */exports.getDevicesByPoint = getDevicesByPoint;
+var getEquipmentDate = function getEquipmentDate(data) {
+  return (0, _request.default)({
+    url: '/nearby/getEquipmentDate',
+    data: data,
+    method: 'post',
+    header: {
+      'content-type': 'application/json' } });
+
+
+};exports.getEquipmentDate = getEquipmentDate;
 
 /***/ }),
-/* 143 */
+/* 146 */
 /*!***************************************************************!*\
-  !*** C:/Users/Acer/Desktop/hd/hduser-applet/uitls/request.js ***!
+  !*** C:/Users/Acer/Desktop/hd/hduser-applet/utils/request.js ***!
   \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // const BAST_URL = 'http://192.168.3.7:3000'
-var BAST_URL = 'http://www.tengfuchong.com.cn';var _default =
+var BAST_URL = 'https://app.tengfuchong.com';var _default =
 function _default() {var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},_ref$url = _ref.url,url = _ref$url === void 0 ? '' : _ref$url,data = _ref.data,_ref$header = _ref.header,header = _ref$header === void 0 ? {} : _ref$header,_ref$method = _ref.method,method = _ref$method === void 0 ? 'GET' : _ref$method,_ref$timeout = _ref.timeout,timeout = _ref$timeout === void 0 ? 120000 : _ref$timeout,_ref$showLoading = _ref.showLoading,showLoading = _ref$showLoading === void 0 ? '加载中' : _ref$showLoading;
   if (method.toUpperCase() === 'POST' && !header['content-type']) {
     header['content-type'] = 'application/x-www-form-urlencoded';
@@ -18394,9 +19752,15 @@ function _default() {var _ref = arguments.length > 0 && arguments[0] !== undefin
       timeout: timeout,
       method: method,
       success: function success(res) {
+        // uni.showToast({
+        // 	title: JSON.stringify(res)
+        // })
         reslove(res.data);
       },
       fail: function fail(err) {
+        // uni.showToast({
+        // 	title: err.errMsg
+        // })
         reject(err);
       },
       complete: function complete() {
@@ -18410,9 +19774,6 @@ function _default() {var _ref = arguments.length > 0 && arguments[0] !== undefin
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 144 */,
-/* 145 */,
-/* 146 */,
 /* 147 */,
 /* 148 */,
 /* 149 */,
@@ -18423,21 +19784,127 @@ function _default() {var _ref = arguments.length > 0 && arguments[0] !== undefin
 /* 154 */,
 /* 155 */,
 /* 156 */,
-/* 157 */
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
+/* 164 */,
+/* 165 */,
+/* 166 */,
+/* 167 */,
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */
+/*!************************************************************!*\
+  !*** C:/Users/Acer/Desktop/hd/hduser-applet/utils/util.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function formatTime(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+}
+
+function formatNumber(n) {
+  n = n.toString();
+  return n[1] ? n : '0' + n;
+}
+
+module.exports = {
+  formatTime: formatTime };
+
+
+var getQueryString = function getQueryString(url, name) {
+  console.log('url = ' + url);
+  console.log('name = ' + name);
+  var reg = new RegExp('(^|&|/?)' + name + '=([^&|/?]*)(&|/?|$)', 'i');
+  var r = url.substr(1).match(reg);
+
+  if (r != null) {
+    console.log('r = ' + r);
+    console.log('r[2] = ' + r[2]);
+    return r[2];
+  }
+
+  return null;
+};
+
+module.exports = {
+  getQueryString: getQueryString };
+
+/***/ }),
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */
 /*!*************************************************************!*\
-  !*** C:/Users/Acer/Desktop/hd/hduser-applet/uitls/index.js ***!
+  !*** C:/Users/Acer/Desktop/hd/hduser-applet/utils/index.js ***!
   \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getElementInfo = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.checkURL = exports.parseUrl = exports.getElementInfo = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}
 /**
-                                                                                                             * 查询元素信息，
-                                                                                                             * context: 查询上下文环境this
-                                                                                                             * selector: 选择器
-                                                                                                             * range: 查询范围 0 查询一个元素 1 查询多个元素 2 查询视口
-                                                                                                             */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 查询元素信息，
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * context: 查询上下文环境this
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * selector: 选择器
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * range: 查询范围 0 查询一个元素 1 查询多个元素 2 查询视口
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
 var getElementInfo = function getElementInfo(context, selector) {var range = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   return new Promise(function (resolve, reject) {
     if (typeof selector === 'undefined') {
@@ -18460,44 +19927,125 @@ var getElementInfo = function getElementInfo(context, selector) {var range = arg
     }
 
   });
-};exports.getElementInfo = getElementInfo;
+};
+
+/**
+    * 解析url
+    */exports.getElementInfo = getElementInfo;
+var parseUrl = function parseUrl(string) {
+  var keyValues = string.split(/&/);
+  return keyValues.reduce(function (acc, item) {
+    var result = item.split(/=/);
+    if (result.length <= 1) {
+      return acc;
+    }var _result = _slicedToArray(
+    result, 2),key = _result[0],value = _result[1];
+    if (typeof acc[key] === 'undefined') {
+      acc[key] = decodeURIComponent(value);
+    } else {
+      if (!(acc[key] instanceof Array)) {
+        acc[key] = [acc[key]];
+      }
+      acc[key].push(decodeURIComponent(value));
+    }
+    return acc;
+  }, {});
+};
+/**
+    * 
+    * @param {string} base_url //扫码基础路径，在app.js中配置的全局变量
+    * @param {string} url //要检测的地址
+    * 返回值 {object} status：400 检验地址不通过，201 检验在线卡/设备号不通过 200是校验成功
+    * type：1、校验设备地址 2、检验在线卡地址
+    */exports.parseUrl = parseUrl;
+var checkURL = function checkURL(base_url, url) {
+  var blueBaseUrl = 'https://www.tengfuchong.cn'; //蓝牙设备基础路径 
+  var list = url.split('?');
+  var c_url = list[0];
+  var c_data = parseUrl(list[1]);
+  var checkState = [
+  {
+    path: '/oauth2pay',
+    regexp: /^\d{6}$/,
+    key: 'code' },
+
+  {
+    path: '/oauth2Portpay',
+    regexp: /^\d{7,8}$/,
+    key: 'codeAndPort' },
+
+  {
+    path: '/oauth2online',
+    regexp: /^[0-9A-F]{8}$/i,
+    key: 'cardNumber' },
+  // https://www.tengfuchong.cn/applet/009506
+  {
+    path: '/applet',
+    regexp: /^\d{7,8}$/,
+    key: '' }];
+
+
+  for (var _i2 = 0, _checkState = checkState; _i2 < _checkState.length; _i2++) {var _checkState$_i = _checkState[_i2],path = _checkState$_i.path,regexp = _checkState$_i.regexp,key = _checkState$_i.key;
+    if (c_url.includes(base_url + path)) {
+      return _objectSpread({
+        status: regexp.test(c_data[key]) ? 200 : 201, //200检验成功,201、设备号或在线卡检验不通过
+        type: key === 'code' ? 1 : key === 'codeAndPort' ? 2 : key === 'cardNumber' ? 3 : 0 },
+      c_data);
+
+    } else {
+      if (url.includes('https://www.tengfuchong.cn/applet/')) {
+        var resu = url.replace('https://www.tengfuchong.cn/applet/', '');
+        return {
+          status: 200,
+          type: 'applet',
+          code: resu.substr(0, 6),
+          port: resu.substr(6) };
+
+      }
+    }
+  }
+  return _objectSpread({
+    status: 400 },
+  c_data);
+
+};exports.checkURL = checkURL;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */
 /*!************************************************************************************************!*\
   !*** C:/Users/Acer/Desktop/hd/hduser-applet/uni_modules/uview-ui/components/u-search/props.js ***!
   \************************************************************************************************/
@@ -18623,14 +20171,88 @@ var getElementInfo = function getElementInfo(context, selector) {var range = arg
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Acer/Desktop/hd/hduser-applet/uni_modules/uview-ui/components/u-skeleton/props.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  props: {
+    // 是否展示骨架组件
+    loading: {
+      type: Boolean,
+      default: uni.$u.props.skeleton.loading },
+
+    // 是否开启动画效果
+    animate: {
+      type: Boolean,
+      default: uni.$u.props.skeleton.animate },
+
+    // 段落占位图行数
+    rows: {
+      type: [String, Number],
+      default: uni.$u.props.skeleton.rows },
+
+    // 段落占位图的宽度
+    rowsWidth: {
+      type: [String, Number, Array],
+      default: uni.$u.props.skeleton.rowsWidth },
+
+    // 段落占位图的高度
+    rowsHeight: {
+      type: [String, Number, Array],
+      default: uni.$u.props.skeleton.rowsHeight },
+
+    // 是否展示标题占位图
+    title: {
+      type: Boolean,
+      default: uni.$u.props.skeleton.title },
+
+    // 段落标题的宽度
+    titleWidth: {
+      type: [String, Number],
+      default: uni.$u.props.skeleton.titleWidth },
+
+    // 段落标题的高度
+    titleHeight: {
+      type: [String, Number],
+      default: uni.$u.props.skeleton.titleHeight },
+
+    // 是否展示头像占位图
+    avatar: {
+      type: Boolean,
+      default: uni.$u.props.skeleton.avatar },
+
+    // 头像占位图大小
+    avatarSize: {
+      type: [String, Number],
+      default: uni.$u.props.skeleton.avatarSize },
+
+    // 头像占位图的形状，circle-圆形，square-方形
+    avatarShape: {
+      type: String,
+      default: uni.$u.props.skeleton.avatarShape } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */
 /*!***********************************************************************************************!*\
   !*** C:/Users/Acer/Desktop/hd/hduser-applet/uni_modules/uview-ui/components/u-empty/props.js ***!
   \***********************************************************************************************/
@@ -18697,14 +20319,14 @@ var getElementInfo = function getElementInfo(context, selector) {var range = arg
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */
 /*!**********************************************************************************************!*\
   !*** C:/Users/Acer/Desktop/hd/hduser-applet/uni_modules/uview-ui/components/u-icon/icons.js ***!
   \**********************************************************************************************/
@@ -18927,7 +20549,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   'uicon-en': "\uE692" };exports.default = _default;
 
 /***/ }),
-/* 208 */
+/* 278 */
 /*!**********************************************************************************************!*\
   !*** C:/Users/Acer/Desktop/hd/hduser-applet/uni_modules/uview-ui/components/u-icon/props.js ***!
   \**********************************************************************************************/

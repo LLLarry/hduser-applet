@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "m-port-status": "/components/m-port-status/m-port-status",
+    "m-icon-image": "/components/m-icon-image/m-icon-image"
+  }
+}

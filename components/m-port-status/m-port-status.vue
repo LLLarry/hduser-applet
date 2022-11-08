@@ -1,8 +1,8 @@
 <template>
-	<cover-view class="m-port-status padding-x-1 text-white" :class="classText" v-if="coverView">
+	<cover-view class="m-port-status padding-x-2 text-white" :class="classText" v-if="coverView">
 		{{ text }}
 	</cover-view>
-	<view class="m-port-status padding-x-1 text-white" :class="classText" v-else>
+	<view class="m-port-status padding-x-2 text-white" :class="classText" v-else>
 		{{ text }}
 	</view>
 </template>
@@ -46,10 +46,10 @@
 
 <style lang="scss" scoped>
 .m-port-status {
-	height: 40rpx;
-	line-height: 40rpx;
+	height: 36rpx;
+	line-height: 36rpx;
 	font-size: 12px;
-	border-radius: 4rpx;
+	border-radius: 36rpx;
 	&.success {
 		background-color: #07c160;
 	}

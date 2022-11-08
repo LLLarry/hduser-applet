@@ -1,0 +1,1 @@
+<view class="container"><icon type="warn" size="45" color="orange"></icon><text style="margin:5px;">系统识别您未打开蓝牙，请打开蓝牙</text><button data-event-opts="{{[['tap',[['scanQrcodeConnect',['$event']]]]]}}" class="scan" catchtap="__e">重新扫码</button></view>

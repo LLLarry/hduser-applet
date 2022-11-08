@@ -9,19 +9,68 @@
 			
 		},
 		{
-			"path": "pages/charge/charge",
+			"path": "pages/device/device",
 			"style": {
-				"navigationBarTitleText": "充电界面",
-				"navigationBarBackgroundColor": "#FFFFFF"
+				"enablePullDownRefresh": true
 			}
-			
+		},
+		{
+			"path": "pages/home/home",
+			"style": {}
+		},
+		{
+			"path": "pages/loading/loading",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/loading2/loading2",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/incoins/incoins",
+			"style": {}
+		},
+		{
+			"path": "pages/ad/ad",
+			"style": {}
+		},
+		{
+			"path": "pages/warn/warn",
+			"style": {}
+		},
+		{
+			"path": "pages/scancode/scancode",
+			"style": {}
 		}
-	],
+	
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "自助充电平台",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-	"uniIdRouter": {}
+	"uniIdRouter": {},
+	"tabBar": {
+		"color": "#000000",
+		"selectedColor": "#0066cc",
+		"list": [
+			{
+				"pagePath": "pages/device/device",
+				"text": "首页",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home-active.png"
+			},
+			{
+				"pagePath": "pages/home/home",
+				"text": "我的",
+				"iconPath": "static/images/my.png",
+				"selectedIconPath": "static/images/my-active.png"
+			}
+		]
+	}
 }

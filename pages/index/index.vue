@@ -50,7 +50,7 @@
 </template>
 
 <script>
-	import { getDevicesByPoint } from '@/api/home/index.js'
+	import { getDevicesByPoint, getEquipmentDate } from '@/api/home/index.js'
 	const baseSize = 30
 	export default {
 		data() {
@@ -70,7 +70,8 @@
 				current: 0, // 当前设备类型 0 两轮电动车 1 电动汽车
 				markers: [], // 地图标点数据
 				list: [], // 获取到的设备信息
-				scale: 16, // 苏方级别
+				
+				scale: 16, // 缩放级别
 				longitude: 116.397228240966, // 目前人处于的位置
 				latitude: 39.90960456049752,
 				mapLongitude: 116.397228240966, // 地图中心所处位置
@@ -96,12 +97,12 @@
 				success: (res) => {
 					this.longitude = res.longitude
 					this.latitude = res.latitude
-					console.log('当前位置的经度：' + res.longitude);
-					console.log('当前位置的纬度：' + res.latitude);
+					// console.log('当前位置的经度：' + res.longitude);
+					// console.log('当前位置的纬度：' + res.latitude);
 					this.mpCtx.moveToLocation()
 				},
 				fail (res) {
-					console.log('fail', res)
+					// console.log('fail', res)
 				}
 			});
 		},
@@ -150,20 +151,32 @@
 					})
 				}
 			},
+			// 获取设备详细信息
+			async getDeviceDetail (data) {
+				const { code, message, result } = await getEquipmentDate(data)
+				if (code === 200) {
+					return result
+				} else {
+					uni.showToast({
+						title: message
+					})
+					return Promise.reject(message)
+				}
+			},
 			sectionChange (index) {
 				this.current = index
 			},
 			// 格式化小区的数据
 			fmtData (json) {
 				return json.map(one => {
-					const { geoCoord: [longitude, latitude], deviceNum } = one
-					if (this.selectDevice && Number(this.selectDevice.deviceNum) === Number(deviceNum)) {
-						console.log('yyyyyyyyyyyyyyy', deviceNum, Number(deviceNum))
+					const { device = {} } = one
+					const {geoCoord: [longitude, latitude], code} = device
+					if (this.selectDevice && Number(this.selectDevice.deviceNum) === Number(code)) {
 						return {
 							latitude,
 							longitude,
-							iconPath: '/static/images/marker_active.png',
-							id: Number(deviceNum),
+							iconPath: this.getIconPath(true),
+							id: Number(code),
 							width: (baseSize + 6) + 'px',
 							height: baseSize + 6 + 'px',
 							joinCluster: false // 参与点聚合
@@ -172,8 +185,8 @@
 					return {
 						latitude,
 						longitude,
-						iconPath: '/static/images/marker.png',
-						id: Number(deviceNum),
+						iconPath: this.getIconPath(false),
+						id: Number(code),
 						width: baseSize + 'px',
 						height: baseSize + 'px',
 						joinCluster: false // 参与点聚合
@@ -189,13 +202,19 @@
 				})
 			},
 			// 点击地图标点
-			markertap ({ markerId }) {
+			async markertap ({ markerId }) {
 				this.isNowSelectDevice = true
+				// 获取设备的详细信息
+				const result = await this.getDeviceDetail([markerId.toString().padStart(6, '0')])
 				setTimeout(() => {
 					this.isNowSelectDevice = false
 				}, 200)
 				// 筛选出符合条件的设备
-				this.selectDevice = this.list.find(item => Number.parseInt(item.deviceNum) === markerId) 
+				const findItem = this.list.find(item => Number.parseInt(item.device.code) === markerId)
+				this.selectDevice = findItem ? {
+					...findItem.device,
+					...result[0]
+				} : null
 				// 选中的marker点放大，其他的marker点缩小
 				this.selectMarkerFun(markerId)
 			},
@@ -208,11 +227,11 @@
 					if (markerId === marker.id) {
 						marker.width = (baseSize + 6) + 'px'
 						marker.height = (baseSize + 6) + 'px'
-						marker.iconPath = '/static/images/marker_active.png'
+						marker.iconPath = this.getIconPath(true)
 					} else {
 						marker.width = baseSize + 'px'
 						marker.height = baseSize + 'px'
-						marker.iconPath = '/static/images/marker.png'
+						marker.iconPath =  this.getIconPath(false)
 					}
 					return marker
 				})
@@ -248,11 +267,10 @@
 			  this.scale = 16
 			},
 			updated (detail) {
-				console.log('updated', detail)
+				// console.log('updated', detail)
 			},
 			// 显示范围改变
 			regionchange ({detail}) {
-				console.log('regionchange', detail.centerLocation)
 				if (detail.centerLocation) {
 					this.mapLongitude = detail.centerLocation.longitude // 地图中心所处位置
 					this.mapLatitude = detail.centerLocation.latitude
@@ -282,10 +300,10 @@
 							name: this.selectDevice,
 							address: '中国河南郑州管城回族区',
 							success: function () {
-								console.log('success');
+								// console.log('success');
 							},
 							fail: function (res) {
-								console.log('fail', res);
+								// console.log('fail', res);
 							}
 						});
 					}
@@ -293,6 +311,22 @@
 			},
 			toggleMode (mode) {
 				this.mode = mode
+			},
+			// 获取图片路径
+			getIconPath (isActive) {
+				if (this.current === 0) { // 两轮电车桩
+					if (isActive) { // 选中
+						return '/static/images/marker_active.png'
+					} else { // 未选中
+						return '/static/images/marker.png'
+					}
+				} else { // 汽车桩
+					if (isActive) { // 选中
+						return '/static/images/marker_car_active.png'
+					} else { // 未选中
+						return '/static/images/marker_car.png'
+					}
+				}
 			}
 		}
 	}
