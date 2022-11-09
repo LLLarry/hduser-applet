@@ -1,8 +1,8 @@
 <template>
-	<view class="m-device-list padding-2 d-flex flex-column">
-		<view>
+	<view class="m-device-list padding-top-1 padding-bottom-2 d-flex flex-column">
+		<!-- <view>
 			<u-search :animation="true" v-model="keywords" @search="search" @custom="search"></u-search>
-		</view>
+		</view> -->
 		<view class="padding-y-3 padding-x-2" v-if="loading">
 			<u-skeleton
 				rows="3"
@@ -10,7 +10,7 @@
 				loading
 			></u-skeleton>
 		</view>
-		<view class="flex-1 d-flex flex-column overflow-hidden" v-else>
+		<view class="flex-1 d-flex flex-column overflow-hidden padding-x-2" v-else>
 			<scroll-view class="flex-1 margin-top-2 overflow-auto" scroll-y="true" @scrolltolower="scrolltolower" v-if="detailList.length > 0" :scroll-top="scrollTop">
 				<view v-for="info in detailList" :key="info.deviceNum">
 					<m-device-info :info="info"></m-device-info>
@@ -35,13 +35,17 @@
 			list: {
 				type: Array,
 				default: () =>([])
+			},
+			keywords: {
+				type: String,
+				default: ''
 			}
 		},
 		data () {
 			return {
 				// renderList: [],
 				// index: 0,
-				keywords: "",
+				// keywords: "",
 				confrimKeywords: "",
 				scrollTop: 0,
 				detailList: [], // 详细的设备信息
@@ -121,7 +125,8 @@
 		watch: {
 			list: {
 				handler (v) {
-					this.keywords = this.confrimKeywords = ''
+					// this.keywords = this.confrimKeywords = ''
+					this.confrimKeywords = ''
 					this.scrollTop = 0
 					this.page = 1
 					// if (v.length > LIMIT) {

@@ -23,3 +23,15 @@ export const getEquipmentDate = (data) => {
 		}
 	})
 }
+
+/**
+ * 获取设备详细信息
+ */
+export const authorization = (data) => {
+	return request({
+		url: '/authorization',
+		data,
+		method: 'post'
+	})
+}
+

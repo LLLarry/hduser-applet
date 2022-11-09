@@ -2,6 +2,7 @@
   "navigationBarTitleText": "附近电站",
   "navigationBarBackgroundColor": "#FFFFFF",
   "usingComponents": {
+    "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
     "m-subsection": "/components/m-subsection/m-subsection",
     "m-device-info": "/components/m-device-info/m-device-info",
     "m-device-list": "/components/m-device-list/m-device-list"

@@ -31,7 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scancode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scancode.vue?vue&type=script&lang=js& */ 210);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _scancode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _scancode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _scancode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./scancode.vue?vue&type=style&index=0&lang=css& */ 212);
-/* harmony import */ var _Software_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../Software/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 11);
+/* harmony import */ var _Software_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../Software/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 13);
 
 var renderjs
 
@@ -132,43 +132,43 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-var app = getApp();
 
-var utils = __webpack_require__(/*! ../../utils/util */ 171);var _default =
 
-{
-  data: function data() {
-    return {
-      items: [
-      {
-        name: '1',
-        value: '1元' },
 
-      {
-        name: '2',
-        value: '2元',
-        checked: 'true' },
 
-      {
-        name: '3',
-        value: '3元' },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _index = __webpack_require__(/*! @/api/home/index.js */ 9); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var app = getApp();var utils = __webpack_require__(/*! ../../utils/util */ 171);var _default = { data: function data() {return { items: [{ name: '1', value: '1元' }, { name: '2', value: '2元', checked: 'true' }, { name: '3', value: '3元' },
 
       {
         name: '4',
@@ -234,24 +234,15 @@ var utils = __webpack_require__(/*! ../../utils/util */ 171);var _default =
               uni.setStorageSync('userInfo', objz); //存储userInfo
             } });
 
-          var l =
-          'https://api.weixin.qq.com/sns/jscode2session?appid=wxd055087c1caa71a6&secret=c94124dcb3eeecc068802f4025ecb8a0&js_code=' +
-          res.code +
-          '&grant_type=authorization_code';
-          uni.request({
-            url: l,
-            data: {},
-            method: 'GET',
-            // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-            // header: {}, // 设置请求的 header
-            success: function success(res) {
-              // console.log('res===' + res.data);
-              var obj = {};
-              obj.openid = res.data.openid; // console.log(obj);
+          // 获取用户openid
+          (0, _index.authorization)({
+            code: res.code }).
+          then(function (res) {
+            var obj = {};
+            obj.openid = res.openid; // console.log(obj);
 
-              uni.setStorageSync('user', obj); //存储openid
-            } });
-
+            uni.setStorageSync('user', obj); //存储openid
+          });
         } else {
           // console.log('获取用户登录态失败！' + res.errMsg)
         }

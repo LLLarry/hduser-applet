@@ -110,10 +110,7 @@ export default {
                             uni.setStorageSync('userInfo', objz); //存储userInfo
                         }
                     });
-                    var l =
-                        'https://api.weixin.qq.com/sns/jscode2session?appid=wxd055087c1caa71a6&secret=c94124dcb3eeecc068802f4025ecb8a0&js_code=' +
-                        res.code +
-                        '&grant_type=authorization_code';
+             
                     uni.request({
                         url: 'https://app.tengfuchong.com/applet/getWxUserInfo?code=' + res.code,
                         success: function (res) {

@@ -46,18 +46,21 @@
 
 <style lang="scss" scoped>
 .m-port-status {
-	height: 36rpx;
-	line-height: 36rpx;
+	height: 50rpx;
+	line-height: 50rpx;
 	font-size: 12px;
-	border-radius: 36rpx;
+	border-radius: 50rpx;
 	&.success {
-		background-color: #07c160;
+		background-color: #ccf1d5;
+		color: #07c160;
 	}
 	&.use {
-		background-color: #ff3141;
+		background-color: #efe1de;
+		color: #e60012;
 	}
 	&.forbid {
-		background-color: #666666;
+		background-color: #f1eedf;
+		color: #fe9230;
 	}
 }
 </style>

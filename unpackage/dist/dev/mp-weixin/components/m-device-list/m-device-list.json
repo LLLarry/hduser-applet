@@ -1,7 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
     "u-skeleton": "/uni_modules/uview-ui/components/u-skeleton/u-skeleton",
     "m-device-info": "/components/m-device-info/m-device-info",
     "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty"

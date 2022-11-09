@@ -18,7 +18,7 @@
 const app = getApp();
 
 var utils = require('../../utils/util');
-
+import { authorization } from '@/api/home/index.js'
 export default {
     data() {
         return {
@@ -100,24 +100,15 @@ export default {
                             uni.setStorageSync('userInfo', objz); //存储userInfo
                         }
                     });
-                    var l =
-                        'https://api.weixin.qq.com/sns/jscode2session?appid=wxd055087c1caa71a6&secret=c94124dcb3eeecc068802f4025ecb8a0&js_code=' +
-                        res.code +
-                        '&grant_type=authorization_code';
-                    uni.request({
-                        url: l,
-                        data: {},
-                        method: 'GET',
-                        // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-                        // header: {}, // 设置请求的 header
-                        success: function (res) {
-                            // console.log('res===' + res.data);
-                            var obj = {};
-                            obj.openid = res.data.openid; // console.log(obj);
-
-                            uni.setStorageSync('user', obj); //存储openid
-                        }
-                    });
+					// 获取用户openid
+					authorization({
+						code: res.code
+					}).then(res => {
+						var obj = {};
+						obj.openid = res.openid; // console.log(obj);
+						
+						uni.setStorageSync('user', obj); //存储openid
+					})
                 } else {
                     // console.log('获取用户登录态失败！' + res.errMsg)
                 }

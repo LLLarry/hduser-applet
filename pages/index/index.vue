@@ -1,19 +1,25 @@
 <template>
 	<view class="page-body d-flex flex-column position-relative">
-		<view class="d-flex align-items-center w-100 bg-white header">
-			<view class="flex-1">
-				<m-subsection :list="tabList" :currentIndex="current" @change="sectionChange"></m-subsection>
+		<view class="header position-relative" :class="{ active: mode === 'list' }">
+			<view class="padding-2" v-if="mode === 'list'">
+				<u-search :animation="true" inputAlign="center" height="72rpx" v-model="keywords" @search="search" @custom="search"></u-search>
 			</view>
-			<view class="padding-x-2">
-				<view class="d-flex align-items-center" v-if="mode === 'list'" @click="toggleMode('map')">
-					<text class="iconfont icon-ditu text-666 margin-right-1 text-primary"></text>
-					<text class="text-666 text-size-md text-primary" >地图</text>
+			<view class="d-flex bg-white header-box header-contral">
+				<view class="flex-1 m-subsection-box">
+					<m-subsection :list="tabList" :currentIndex="current" @change="sectionChange"></m-subsection>
 				</view>
-				<view class="d-flex align-items-center" v-else @click="toggleMode('list')">
-					<text class="iconfont icon-liebiao text-666 margin-right-1 text-primary"></text>
-					<text class="text-666 text-size-md text-primary" >列表</text>
+				<view class="map-list-box padding-x-2 d-flex align-items-center justify-content-center">
+					<view class="d-flex align-items-center" v-if="mode === 'list'" @click="toggleMode('map')">
+						<text class="iconfont icon-ditu text-666 margin-right-1 text-success"></text>
+						<text class="text-666 text-size-md text-success" >地图</text>
+					</view>
+					<view class="d-flex align-items-center" v-else @click="toggleMode('list')">
+						<text class="iconfont icon-liebiao text-666 margin-right-1 text-success"></text>
+						<text class="text-666 text-size-md text-success" >列表</text>
+					</view>
 				</view>
 			</view>
+			<view class="bg-mask bg-white position-absolute"></view>
 		</view>
 		
 		
@@ -44,14 +50,14 @@
 			<m-device-info :coverView="coverView" v-if="selectDevice" :info="selectDevice" />
 		</view>
 		<view class="list-section page-section page-section-gap flex-1 position-relative overflow-hidden" v-if="mode === 'list'">
-			<m-device-list :list="list"/>
+			<m-device-list :list="list" :keywords="keywords" ref="m-device-list" />
 		</view>
 	</view>
 </template>
 
 <script>
 	import { getDevicesByPoint, getEquipmentDate } from '@/api/home/index.js'
-	const baseSize = 30
+	const baseSize = 34
 	export default {
 		data() {
 			return {
@@ -80,10 +86,30 @@
 				selectDevice: null, // 选择的设备信息
 				mode: 'map', // 当前模式 map / list
 				isNowSelectDevice: false, // 是否正在选中Device事件，选中后200ms关闭
+				keywords: '',
 			}
 		},
 		onLoad () {           
-			// this.getDeviceList(this.longitude, this.latitude)
+
+			// uni.login({
+			//     success: function (res) {
+			// 		authorization({
+			// 			code: res.code
+			// 		}).then(res => {
+			// 			uni.showModal({
+			// 				title: '提示',
+			// 				content: JSON.stringify(res),
+			// 				success: function (res) {
+			// 					if (res.confirm) {
+			// 						console.log('用户点击确定');
+			// 					} else if (res.cancel) {
+			// 						console.log('用户点击取消');
+			// 					}
+			// 				}
+			// 			});
+			// 		})
+			// 	},
+			// })
 		},
 		mounted () {
 			this.mpCtx = uni.createMapContext('map', this)
@@ -165,6 +191,7 @@
 			},
 			sectionChange (index) {
 				this.current = index
+				this.keywords = ''
 			},
 			// 格式化小区的数据
 			fmtData (json) {
@@ -177,8 +204,8 @@
 							longitude,
 							iconPath: this.getIconPath(true),
 							id: Number(code),
-							width: (baseSize + 6) + 'px',
-							height: baseSize + 6 + 'px',
+							width: (baseSize + 8) + 'px',
+							height: baseSize + 8 + 'px',
 							joinCluster: false // 参与点聚合
 						}
 					}
@@ -225,8 +252,8 @@
 				this.markers = this.markers.map(marker => {
 					
 					if (markerId === marker.id) {
-						marker.width = (baseSize + 6) + 'px'
-						marker.height = (baseSize + 6) + 'px'
+						marker.width = (baseSize + 8) + 'px'
+						marker.height = (baseSize + 8) + 'px'
 						marker.iconPath = this.getIconPath(true)
 					} else {
 						marker.width = baseSize + 'px'
@@ -250,7 +277,7 @@
 				this.markers = this.markers.map(marker => {
 					marker.width = baseSize + 'px'
 					marker.height = baseSize + 'px'
-					marker.iconPath = '/static/images/marker.png'
+					marker.iconPath = this.getIconPath(false)
 					return marker
 				})
 			},
@@ -316,17 +343,21 @@
 			getIconPath (isActive) {
 				if (this.current === 0) { // 两轮电车桩
 					if (isActive) { // 选中
-						return '/static/images/marker_active.png'
+						return '/static/images/bake.png'
 					} else { // 未选中
-						return '/static/images/marker.png'
+						return '/static/images/bake.png'
 					}
 				} else { // 汽车桩
 					if (isActive) { // 选中
-						return '/static/images/marker_car_active.png'
+						// return '/static/images/marker_car_active.png'
+						return '/static/images/car.png'
 					} else { // 未选中
-						return '/static/images/marker_car.png'
+						return '/static/images/car.png'
 					}
 				}
+			},
+			search (...v) {
+				this.$refs['m-device-list'].search(...v)
 			}
 		}
 	}
@@ -338,9 +369,33 @@
 		.page-body {
 			width: 100vw;
 			height: 100vh;
-			background-color: #f5f7fa;
+			background-color: #f3f3f3;
 			.header {
-				height: 80rpx;
+				.header-box {
+					height: 80rpx;
+				}
+				.bg-mask {
+					left: 0;
+					top: 0;
+					bottom: 0;
+					right:0;
+					z-index: -1;
+					border-radius: 0 0 32rpx 32rpx;
+				}
+				&.active {
+					z-index: 1;
+					.header-box {
+						margin: 0 20rpx;
+					}
+					.header-contral {
+						border-radius: 16rpx;
+						overflow: hidden;
+						box-shadow: 6rpx 6rpx 10rpx #eee, -6rpx -6rpx 10rpx #eee;
+					}
+					.bg-mask {
+						bottom: 40rpx;
+					}
+				}
 			}
 			
 			.contral-position {
@@ -358,10 +413,11 @@
 			}
 			.map-section ::v-deep .m-device-info{
 				position: absolute;
-				left: 15rpx;
-				right:15rpx;
+				left: 25rpx;
+				right:25rpx;
 				bottom: 100rpx;
 				z-index: 99;
+				// background-color: #f1faf5;
 			}
 			.list-section ::v-deep {
 				.m-device-list {
@@ -371,6 +427,9 @@
 				.m-device-info {
 					margin-bottom: 24rpx;
 				}
+			}
+			.map-list-box {
+				background-color: #bce4cd;
 			}
 		}
 		
