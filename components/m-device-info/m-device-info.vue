@@ -166,6 +166,7 @@
 					success:  (res) => {
 						const latitude = this.info.geoCoord[1]
 						const longitude = this.info.geoCoord[0]
+						console.log('组件内 openLocation success', res)
 						uni.openLocation({
 							latitude: latitude,
 							longitude: longitude,
@@ -179,6 +180,12 @@
 								console.log('fail', res);
 							}
 						});
+					},
+					fail (res) {
+						uni.showModal({
+							content: "请检查您的定位或GPS是否打开"
+						})
+						console.log('组件内 openLocation fail', res)
 					}
 				})
 			},

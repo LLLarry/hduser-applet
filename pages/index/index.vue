@@ -204,8 +204,8 @@
 							longitude,
 							iconPath: this.getIconPath(true),
 							id: Number(code),
-							width: (baseSize + 8) + 'px',
-							height: baseSize + 8 + 'px',
+							width: (baseSize + 8),
+							height: baseSize + 8,
 							joinCluster: false // 参与点聚合
 						}
 					}
@@ -214,8 +214,8 @@
 						longitude,
 						iconPath: this.getIconPath(false),
 						id: Number(code),
-						width: baseSize + 'px',
-						height: baseSize + 'px',
+						width: baseSize,
+						height: baseSize,
 						joinCluster: false // 参与点聚合
 					}
 				})
@@ -252,12 +252,12 @@
 				this.markers = this.markers.map(marker => {
 					
 					if (markerId === marker.id) {
-						marker.width = (baseSize + 8) + 'px'
-						marker.height = (baseSize + 8) + 'px'
+						marker.width = (baseSize + 8)
+						marker.height = (baseSize + 8)
 						marker.iconPath = this.getIconPath(true)
 					} else {
-						marker.width = baseSize + 'px'
-						marker.height = baseSize + 'px'
+						marker.width = baseSize
+						marker.height = baseSize
 						marker.iconPath =  this.getIconPath(false)
 					}
 					return marker
@@ -275,8 +275,8 @@
 				 */
 				// 标点按钮恢复正常大小
 				this.markers = this.markers.map(marker => {
-					marker.width = baseSize + 'px'
-					marker.height = baseSize + 'px'
+					marker.width = baseSize
+					marker.height = baseSize
 					marker.iconPath = this.getIconPath(false)
 					return marker
 				})

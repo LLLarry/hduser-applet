@@ -370,8 +370,8 @@ var baseSize = 34;var _default =
             longitude: longitude,
             iconPath: _this3.getIconPath(true),
             id: Number(code),
-            width: baseSize + 8 + 'px',
-            height: baseSize + 8 + 'px',
+            width: baseSize + 8,
+            height: baseSize + 8,
             joinCluster: false // 参与点聚合
           };
         }
@@ -380,8 +380,8 @@ var baseSize = 34;var _default =
           longitude: longitude,
           iconPath: _this3.getIconPath(false),
           id: Number(code),
-          width: baseSize + 'px',
-          height: baseSize + 'px',
+          width: baseSize,
+          height: baseSize,
           joinCluster: false // 参与点聚合
         };
       });
@@ -418,12 +418,12 @@ var baseSize = 34;var _default =
       this.markers = this.markers.map(function (marker) {
 
         if (markerId === marker.id) {
-          marker.width = baseSize + 8 + 'px';
-          marker.height = baseSize + 8 + 'px';
+          marker.width = baseSize + 8;
+          marker.height = baseSize + 8;
           marker.iconPath = _this5.getIconPath(true);
         } else {
-          marker.width = baseSize + 'px';
-          marker.height = baseSize + 'px';
+          marker.width = baseSize;
+          marker.height = baseSize;
           marker.iconPath = _this5.getIconPath(false);
         }
         return marker;
@@ -441,8 +441,8 @@ var baseSize = 34;var _default =
                                  */
       // 标点按钮恢复正常大小
       this.markers = this.markers.map(function (marker) {
-        marker.width = baseSize + 'px';
-        marker.height = baseSize + 'px';
+        marker.width = baseSize;
+        marker.height = baseSize;
         marker.iconPath = _this6.getIconPath(false);
         return marker;
       });

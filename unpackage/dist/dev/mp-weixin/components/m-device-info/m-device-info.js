@@ -330,7 +330,14 @@ var _default2 = { name: "m-device-info", props: { coverView: { type: Boolean, de
     areaName: function areaName() {return this.info.area && this.info.area.name ? this.info.area.name : '';} }, methods: { toggle: function toggle() {this.chargeInfoVisible = !this.chargeInfoVisible;if (this.chargeInfoVisible) {// this.chargeInfoHeight = this.chargeInfoOriginHeight + 'px'
         this.chargeInfoHeight = 'initial';} else {this.chargeInfoHeight = '17px';}}, // 点击唤起内置地图查看位置
     openLocation: function openLocation() {var _this = this;console.log('组件内 openLocation');uni.getLocation({ type: 'gcj02', //返回可以用于uni.openLocation的经纬度
-        success: function success(res) {var latitude = _this.info.geoCoord[1];var longitude = _this.info.geoCoord[0];uni.openLocation({ latitude: latitude, longitude: longitude, scale: 8, name: _this.info.deviceName || _this.info.deviceNum, address: _this.info.area && _this.info.area.name || '', success: function success() {console.log('success');}, fail: function fail(res) {console.log('fail', res);} });} });} }, watch: { info: { handler: function handler(v) {console.log(v); // this.$nextTick(() =>{
+        success: function success(res) {var latitude = _this.info.geoCoord[1];var longitude = _this.info.geoCoord[0];console.log('组件内 openLocation success', res);uni.openLocation({ latitude: latitude, longitude: longitude, scale: 8, name: _this.info.deviceName || _this.info.deviceNum, address: _this.info.area && _this.info.area.name || '', success: function success() {console.log('success');}, fail: function fail(res) {console.log('fail', res);} });}, fail: function fail(res) {uni.showModal({ content: "请检查您的定位或GPS是否打开" });console.log('组件内 openLocation fail', res);} });} },
+
+
+  watch: {
+    info: {
+      handler: function handler(v) {
+        console.log(v);
+        // this.$nextTick(() =>{
         // 	getElementInfo(this, '.charge-info-box').then(data => {
         // 		if (data) {
         // 			this.chargeInfoOriginHeight = data.height
