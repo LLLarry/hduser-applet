@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/scancode/scancode",
     "pages/index/index",
     "pages/device/device",
     "pages/home/home",
@@ -7,8 +8,7 @@
     "pages/loading2/loading2",
     "pages/incoins/incoins",
     "pages/ad/ad",
-    "pages/warn/warn",
-    "pages/scancode/scancode"
+    "pages/warn/warn"
   ],
   "subPackages": [],
   "window": {
