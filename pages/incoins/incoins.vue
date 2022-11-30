@@ -117,6 +117,10 @@ export default {
       adimg: "/static/images/ad1.png",
       phonenum: options.phonenum,
       merid: options.merid,
+      openid:
+        app.globalData.user && app.globalData.user.openid
+          ? app.globalData.user.openid
+          : "",
     });
     uni.stopBluetoothDevicesDiscovery({
       success: function (res) {},
@@ -139,7 +143,7 @@ export default {
               "https://app.tengfuchong.com/applet/getWxUserInfo?code=" +
               res.code,
             success: function (res) {
-			  const result = res.data
+              const result = res.data;
               if (result.code === 200) {
                 that.setData({
                   openid: result.openid,
@@ -147,7 +151,7 @@ export default {
               } else {
                 uni.showModal({
                   title: "提示",
-                  content: result.message || '未获取到用户',
+                  content: result.message || "未获取到用户",
                   success: function (res) {
                     uni.switchTab({
                       url: "/pages/device/device",

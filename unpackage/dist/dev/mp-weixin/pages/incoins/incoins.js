@@ -250,7 +250,11 @@ var app = getApp();var _default =
       port: options.port,
       adimg: "/static/images/ad1.png",
       phonenum: options.phonenum,
-      merid: options.merid });
+      merid: options.merid,
+      openid:
+      app.globalData.user && app.globalData.user.openid ?
+      app.globalData.user.openid :
+      "" });
 
     uni.stopBluetoothDevicesDiscovery({
       success: function success(res) {} });
@@ -281,7 +285,7 @@ var app = getApp();var _default =
               } else {
                 uni.showModal({
                   title: "提示",
-                  content: result.message || '未获取到用户',
+                  content: result.message || "未获取到用户",
                   success: function success(res) {
                     uni.switchTab({
                       url: "/pages/device/device" });

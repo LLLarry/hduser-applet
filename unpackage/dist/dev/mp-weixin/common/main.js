@@ -105,6 +105,8 @@ __webpack_require__.r(__webpack_exports__);
 var _index = __webpack_require__(/*! @/api/home/index.js */ 9);var _default =
 {
   onLaunch: function onLaunch(options) {
+    // 获取用户openid
+    this.globalData.getUser();
     //调用API从本地缓存中获取数据
     var logs = uni.getStorageSync("logs") || [];
     logs.unshift(Date.now());
@@ -117,7 +119,7 @@ var _index = __webpack_require__(/*! @/api/home/index.js */ 9);var _default =
   },
   globalData: {
     userInfo: null,
-
+    user: null,
     getUserInfo: function getUserInfo(cb) {
       var that = this;
       var unionidval = null;
@@ -135,7 +137,7 @@ var _index = __webpack_require__(/*! @/api/home/index.js */ 9);var _default =
           uni.login({
             success: function success(res) {
               (0, _index.authorization)({ code: res.code }).then(function (res) {
-                var session_key = res.session_key;
+                // var session_key = res.session_key;
                 unionidval = res.unionid;
                 openidval = res.openid;
                 var obj = {
@@ -148,6 +150,23 @@ var _index = __webpack_require__(/*! @/api/home/index.js */ 9);var _default =
             } });
 
         }
+      }
+    },
+    getUser: function getUser() {var _this = this;
+      if (!this.user) {
+        uni.login({
+          success: function success(res) {
+            (0, _index.authorization)({ code: res.code }).then(function (res) {
+              console.log("authorization---", res);
+              if (res.openid) {
+                _this.user = {
+                  unionid: res.unionid,
+                  openid: res.openid };
+
+              }
+            });
+          } });
+
       }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

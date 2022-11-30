@@ -2,6 +2,8 @@
 import { authorization } from "@/api/home/index.js";
 export default {
   onLaunch: function (options) {
+    // 获取用户openid
+    this.globalData.getUser();
     //调用API从本地缓存中获取数据
     var logs = uni.getStorageSync("logs") || [];
     logs.unshift(Date.now());
@@ -14,7 +16,7 @@ export default {
   },
   globalData: {
     userInfo: null,
-
+    user: null,
     getUserInfo: function (cb) {
       var that = this;
       var unionidval = null;
@@ -32,7 +34,7 @@ export default {
           uni.login({
             success: function (res) {
               authorization({ code: res.code }).then((res) => {
-                var session_key = res.session_key;
+                // var session_key = res.session_key;
                 unionidval = res.unionid;
                 openidval = res.openid;
                 var obj = {
@@ -45,6 +47,23 @@ export default {
             },
           });
         }
+      }
+    },
+    getUser() {
+      if (!this.user) {
+        uni.login({
+          success: (res) => {
+            authorization({ code: res.code }).then((res) => {
+              console.log("authorization---", res);
+              if (res.openid) {
+                this.user = {
+                  unionid: res.unionid,
+                  openid: res.openid,
+                };
+              }
+            });
+          },
+        });
       }
     },
   },

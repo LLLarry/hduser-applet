@@ -9,6 +9,13 @@
                     "query": "id=008885&name=test&port=1&phonenum=15538065635",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/incoins/incoins",
+                    "query": "id=008885&name=test&port=1&phonenum=15538065635&merid=9",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }
