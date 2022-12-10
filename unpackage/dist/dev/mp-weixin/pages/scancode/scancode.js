@@ -168,7 +168,7 @@ var _index = __webpack_require__(/*! @/api/home/index.js */ 9); //
 //
 //
 //
-var app = getApp();var utils = __webpack_require__(/*! ../../utils/util */ 171);var _default = { data: function data() {return { items: [{ name: '1', value: '1元' }, { name: '2', value: '2元', checked: 'true' }, { name: '3', value: '3元' },
+var app = getApp();var utils = __webpack_require__(/*! ../../utils/util */ 147);var _default = { data: function data() {return { items: [{ name: '1', value: '1元' }, { name: '2', value: '2元', checked: 'true' }, { name: '3', value: '3元' },
 
       {
         name: '4',

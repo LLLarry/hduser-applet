@@ -77,7 +77,12 @@ export default {
     onShow: function () {
         var that = this;
         uni.stopBluetoothDevicesDiscovery({
-            success: function (res) {}
+            success: function (res) {
+				console.log('stopBluetoothDevicesDiscovery', res)
+			},
+			fail(err) {
+				console.log('stopBluetoothDevicesDiscovery', err)
+			}
         });
         uni.closeBluetoothAdapter({
             success: function (res) {}
@@ -96,16 +101,19 @@ export default {
                 var dataval = res.data.deviceid;
                 var merid = 0;
                 merid = res.data.merid;
+				// 初始化蓝牙模块
                 uni.openBluetoothAdapter({
                     success: function (res) {
                         console.log('初始化蓝牙适配器成功');
+						// 开始搜寻附近的蓝牙外围设备
                         uni.startBluetoothDevicesDiscovery({
                             services: ['FFE0'],
                             allowDuplicatesKey: false,
                             success: function (res) {
                                 console.log('这里是开始搜索附近设备', res);
+								// 监听寻找新设备事件
                                 uni.onBluetoothDeviceFound(function (res) {
-                                    console.log('成功', res); // if (res.devices[0].name.indexOf('JDY-08') != -1) {
+                                    console.log('监听寻找新设备事件-成功', res); // if (res.devices[0].name.indexOf('JDY-08') != -1) {
 
                                     if (res.devices[0].name != undefined && (res.devices[0].name.indexOf('HD-' + that.subq) != -1 || res.devices[0].name.indexOf('JDY-08') != -1)) {
                                         var sysType = that.systemType;

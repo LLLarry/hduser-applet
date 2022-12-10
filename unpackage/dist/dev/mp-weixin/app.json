@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/loading/loading",
     "pages/index/index",
     "pages/device/device",
     "pages/home/home",
-    "pages/loading/loading",
     "pages/loading2/loading2",
     "pages/incoins/incoins",
     "pages/ad/ad",

@@ -156,7 +156,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = getApp();
 
-var utils = __webpack_require__(/*! ../../utils/util */ 171);var _default =
+var utils = __webpack_require__(/*! ../../utils/util */ 147);var _default =
 
 {
   data: function data() {
